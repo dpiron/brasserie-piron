@@ -1,0 +1,87 @@
+{% include "header.html" %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Admin</h1>
+    </div>
+
+    <!-- Beer Table -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Liste des fiches de dégustation</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Utilisateur</th>
+                            <th>Bière</th>
+                            <th>Version</th>
+                            <th>Mousse</th>
+                            <th>Couleur</th>
+                            <th>Transparence</th>
+                            <th>Douceur</th>
+                            <th>Amertume</th>
+                            <th>Acidité</th>
+                            <th>Rondeur</th>
+                            <th>Alcoolique</th>
+                            <th>Ethéré</th>
+                            <th>Fruité</th>
+                            <th>Floral</th>
+                            <th>Houblonné</th>
+                            <th>Résineux</th>
+                            <th>Noix</th>
+                            <th>Herbeux</th>
+                            <th>Caramel</th>
+                            <th>Brulé</th>
+                            <th>Note</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for review in reviews %}
+                        <tr>
+                            <td class="align-middle">{{ review.review_author.name }}</td>
+                            <td class="align-middle">{{ review.reviews_beer.name }}</td>
+                            <td class="align-middle">{{ review.reviews_beer.version }}</td>
+                            <td class="align-middle">{{ review.mousse }}</td>
+                            <td class="align-middle">{{ review.couleur }}</td>
+                            <td class="align-middle">{{ review.transparence }}</td>
+                            <td class="align-middle">{{ review.douceur }}</td>
+                            <td class="align-middle">{{ review.amerture }}</td>
+                            <td class="align-middle">{{ review.acidite }}</td>
+                            <td class="align-middle">{{ review.rondeur }}</td>
+                            <td class="align-middle">{{ review.gushing }}</td>
+                            <td class="align-middle">{{ review.alcoolique }}</td>
+                            <td class="align-middle">{{ review.ethere }}</td>
+                            <td class="align-middle">{{ review.fruite }}</td>
+                            <td class="align-middle">{{ review.floral }}</td>
+                            <td class="align-middle">{{ review.houblonne }}</td>
+                            <td class="align-middle">{{ review.resineux }}</td>
+                            <td class="align-middle">{{ review.noix }}</td>
+                            <td class="align-middle">{{ review.herbeux }}</td>
+                            <td class="align-middle">{{ review.cereales }}</td>
+                            <td class="align-middle">{{ review.caramel }}</td>
+                            <td class="align-middle">{{ review.caramel }}</td>
+                            <td class="align-middle">{{ review.score }}</td>
+                            <td class="align-middle">
+                                <a href="{{ url_for('admin_edit_review', review_id=review.id) }}" class="btn btn-primary btn-circle">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <a class="btn btn-primary" href="{{ url_for('admin') }}" role="button">Retour à Admin</a>
+
+</div>
+
+{% include "footer.html" %}

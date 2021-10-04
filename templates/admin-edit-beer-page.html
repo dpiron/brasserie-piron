@@ -1,0 +1,51 @@
+{% include "header.html" %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Admin</h1>
+    </div>
+
+    <!-- Beer Table -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Liste de Bières</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Bière</th>
+                            <th>Version</th>
+                            <th>Type</th>
+                            <th>Score</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for beer in beers %}
+                        <tr>
+                            <td class="align-middle">{{ beer.name }}</td>
+                            <td class="align-middle">{{ beer.version }}</td>
+                            <td class="align-middle">{{ beer.type }}</td>
+                            <td class="align-middle">{{ beer.score }}</td>
+                            <td class="align-middle">
+                                <a href="{{ url_for('admin_edit_beer', beer_id=beer.id) }}" class="btn btn-primary btn-circle">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <a class="btn btn-primary" href="{{ url_for('admin') }}" role="button">Retour à Admin</a>
+
+</div>
+
+{% include "footer.html" %}

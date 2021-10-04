@@ -1,0 +1,32 @@
+{% import "bootstrap/form.html" as wtf %}
+
+{% include "header.html" %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">{{ beer.name }} (v{{ beer.version }})</h1>
+
+    <p class="mb-4 mt-4 .text-wrap">
+        {{ beer.description }}
+    </p>
+
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto mt-5 mb-5">
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      {{ wtf.render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+
+      </div>
+    </div>
+</div>
+
+{% include "footer.html" %}

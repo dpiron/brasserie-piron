@@ -1,3 +1,5 @@
+<script src="{{ url_for('static', filename='vendor/chart.js/Chart.min.js') }}"></script>
+<script>
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
@@ -50,7 +52,7 @@ var myLineChart = new Chart(ctx, {
       lineTension: 0.1,
       backgroundColor: "rgba(78, 115, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",
-      pointRadius: 3,
+      pointRadius: 0,
       pointBackgroundColor: "rgba(78, 115, 223, 1)",
       pointBorderColor: "rgba(78, 115, 223, 1)",
       pointHoverRadius: 3,
@@ -59,21 +61,29 @@ var myLineChart = new Chart(ctx, {
       pointHitRadius: 10,
       pointBorderWidth: 2,
       data: [
-        Math.round({{ beer.alcoolique }}),
-        Math.round({{ beer.ethere }}),
-        Math.round({{ beer.fruite }}),
-        Math.round({{ beer.floral }}),
-        Math.round({{ beer.houblonne }}),
-        Math.round({{ beer.resineux }}),
-        Math.round({{ beer.noix }}),
-        Math.round({{ beer.herbeux }}),
-        Math.round({{ beer.cereales }}),
-        Math.round({{ beer.caramel }}),
-        Math.round({{ beer.brule }})
+        {{ beer.alcoolique }},
+        {{ beer.ethere }},
+        {{ beer.fruite }},
+        {{ beer.floral }},
+        {{ beer.houblonne }},
+        {{ beer.resineux }},
+        {{ beer.noix }},
+        {{ beer.herbeux }},
+        {{ beer.cereales }},
+        {{ beer.caramel }},
+        {{ beer.brule }}
       ],
     }],
   },
   options: {
+    scale: {
+        ticks: {
+            beginAtZero: true,
+            max: 10,
+            min: 0,
+            stepSize: 1,
+        }
+    },
     legend: {
       display: false
     },
@@ -108,3 +118,4 @@ var myLineChart = new Chart(ctx, {
     }
   }
 });
+</script>

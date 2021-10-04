@@ -1,14 +1,27 @@
+{% import "bootstrap/form.html" as wtf %}
+
 {% include "header.html" %}
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Nom bière
-        <span class="float-right">95/100</span>
-    </h1>
-    <p class="mb-4">
-        Ici description de la bière en quelques lignes.
+    <h1 class="h3 mb-2 text-gray-800">{{ beer.name }}<span class="text-version">
+        {% if n_versions > 1 %}
+        (v{{ beer.version }})
+        {% endif %}
+        - {{ beer.type }}</span></h1>
+
+    {% if n_versions > 1 %}
+        <p class="text-version">Versions :
+            {% for version in all_versions %}
+            <a class="ml-1 text-version text-primary" href="{{ url_for('beer', beer_id=version.id) }}">v{{ version.version }}</a>
+            {% endfor %}
+        </p>
+    {% endif %}
+
+    <p class="mb-4 mt-4 .text-wrap">
+        {{ beer.description }}
     </p>
 
     <!-- Content Row -->
@@ -16,6 +29,38 @@
 
         <!-- Card -->
         <div class="col-lg-6">
+
+            <!-- Project Card Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    {% if is_reviewed %}
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Note globale <a class="btn btn-primary degustez ml-1" href="{{ url_for('review_edit', beer_id=beer.id, review_id=review_id) }}" role="button">Modifier</a>
+                            <span class="text-deja ml-1">(Vous avez déjà créé une fiche de dégustation)</span>
+                        </h6>
+                    {% else %}
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Note globale <a class="btn btn-warning degustez ml-1" href="{{ url_for('review', beer_id=beer.id) }}" role="button">Dégustez!</a>
+                        </h6>
+                    {% endif %}
+                </div>
+
+                <div class="card-body">
+                    <h4 class="small font-weight-bold text-center">
+                         {{ beer.score }} / 10 ({{ n_reviews }} avis)
+                    </h4>
+                    <div class="progress mb-4">
+                        {% if beer.score is not none %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.score*10 }}%"
+                            aria-valuenow="{{ beer.score*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% else %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
             <!-- Project Card Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -31,8 +76,13 @@
                         <span class="float-right">Persistante</span>
                     </h4>
                     <div class="progress mb-4">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 20%"
-                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% if beer.mousse is not none %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.mousse*10 }}%"
+                            aria-valuenow="{{ beer.mousse*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% else %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% endif %}
                     </div>
 
                     <h4 class="small font-weight-bold text-center">
@@ -41,8 +91,13 @@
                         <span class="float-right">Claire</span>
                     </h4>
                     <div class="progress mb-4">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 20%"
-                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% if beer.couleur is not none %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.couleur*10 }}%"
+                            aria-valuenow="{{ beer.couleur*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% else %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% endif %}
                     </div>
 
                     <h4 class="small font-weight-bold text-center">
@@ -51,8 +106,13 @@
                         <span class="float-right">Transparente</span>
                     </h4>
                     <div class="progress mb-4">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 20%"
-                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% if beer.transparence is not none %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.transparence*10 }}%"
+                            aria-valuenow="{{ beer.transparence*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% else %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -66,26 +126,46 @@
                 <div class="card-body">
                     <h4 class="small font-weight-bold text-center">Douceur</h4>
                     <div class="progress mb-4">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 20%"
-                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% if beer.douceur is not none %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.douceur*10 }}%"
+                            aria-valuenow="{{ beer.douceur*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% else %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% endif %}
                     </div>
 
                     <h4 class="small font-weight-bold text-center">Acidité</h4>
                     <div class="progress mb-4">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
-                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% if beer.acidite is not none %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.acidite*10 }}%"
+                            aria-valuenow="{{ beer.acidite*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% else %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% endif %}
                     </div>
 
                     <h4 class="small font-weight-bold text-center">Amertume</h4>
                     <div class="progress mb-4">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 80%"
-                            aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% if beer.amertume is not none %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.amertume*10 }}%"
+                            aria-valuenow="{{ beer.amertume*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% else %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% endif %}
                     </div>
 
                     <h4 class="small font-weight-bold text-center">Rondeur</h4>
                     <div class="progress mb-4">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 20%"
-                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% if beer.rondeur is not none %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.rondeur*10 }}%"
+                            aria-valuenow="{{ beer.rondeur*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% else %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -101,8 +181,13 @@
                         <span class="float-right">Explosif</span>
                     </h4>
                     <div class="progress mb-4">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% if beer.gushing is not none %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.gushing*10 }}%"
+                            aria-valuenow="{{ beer.gushing*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% else %}
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -127,7 +212,20 @@
                     <h6 class="m-0 font-weight-bold text-primary">Commentaires</h6>
                 </div>
                 <div class="card-body">
-                    Zone commentaires
+                    {% for comment in comments %}
+                    <div class="mb-2">
+                        <span class="comment-author small font-weight-bold mb-0">{{ comment.comment_author.name }} : </span>
+                        <span class="comment-text small">{{ comment.text }}</span>
+                        {% if current_user.is_authenticated %}
+                            {% if comment.comment_author == current_user %}
+                            <a class="small comment-icons ml-2" href="{{ url_for('edit_comment', comment_id=comment.id) }}"><i class="fas fa-edit"></i></a>
+                            <a class="small comment-icons" href="{{ url_for('delete_comment', comment_id=comment.id) }}"><i class="fas fa-trash-alt"></i></a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    <hr>
+                    <a class="btn btn-primary degustez ml-1" href="{{ url_for('add_comment', beer_id=beer.id) }}" role="button">Ajouter un commentaire</a>
                 </div>
             </div>
         </div>
@@ -135,5 +233,7 @@
 
 </div>
 <!-- /.container-fluid -->
+
+{% include "radar-chart.html" %}
 
 {% include "footer.html" %}

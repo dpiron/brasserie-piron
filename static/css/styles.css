@@ -1,0 +1,32 @@
+.text-version {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #858796;
+}
+
+.text-deja {
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #858796;
+}
+
+.degustez {
+    padding: .1rem .4rem;
+}
+
+.flash-mess {
+    color:red;
+}
+
+.comment-author {
+}
+
+.comment-text {
+    font-style: italic
+}
+
+.comment-icons {
+    color: #858796
+}
