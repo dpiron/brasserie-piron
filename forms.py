@@ -19,7 +19,7 @@ class LoginForm(FlaskForm):
 
 class AddBeerForm(FlaskForm):
     name = StringField("Nom", validators=[DataRequired()])
-    version = StringField("Version", validators=[DataRequired()])
+    version = IntegerField("Version", validators=[DataRequired()])
     type = StringField("Type", validators=[DataRequired()])
     description = CKEditorField("Description")
     submit = SubmitField("OK")
