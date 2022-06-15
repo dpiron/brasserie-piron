@@ -142,7 +142,7 @@ gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=Fa
 def admin_only(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if not current_user.is_authenticated or current_user.id != 1:
+        if not current_user.is_authenticated or current_user.id > 3:
             return abort(403)
         return f(*args, **kwargs)
 
@@ -673,7 +673,7 @@ def info():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host='0.0.0.0', port=5001, debug=False)
 
 
 # TODO : Ecrire page d'info, formulaire contact
