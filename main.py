@@ -142,7 +142,7 @@ gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=Fa
 def admin_only(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if not current_user.is_authenticated or current_user.id > 3:
+        if not current_user.is_authenticated or current_user.id != 1 or current_user.id != 2 or current_user.id != 3:
             return abort(403)
         return f(*args, **kwargs)
 
