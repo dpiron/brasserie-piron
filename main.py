@@ -386,7 +386,8 @@ def admin_add_beer():
             name=form.name.data,
             type=form.type.data,
             version=form.version.data,
-            description=form.description.data
+            description=form.description.data,
+            score=0
         )
         db.session.add(new_beer)
         db.session.commit()
