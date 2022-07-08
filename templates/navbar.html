@@ -65,7 +65,6 @@
             {% endif %}
 
             {% if current_user.is_authenticated: %}
-            <li><a class="dropdown-item" href="#">Mes dégustations</a></li>
             <li><a class="dropdown-item" href="{{ url_for('change_password') }}">Modifier mot de passe</a></li>
             <li><a class="dropdown-item" href="{{ url_for('logout') }}">Se déconnecter</a></li>
             {% endif %}
