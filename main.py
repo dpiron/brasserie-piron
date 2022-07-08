@@ -1,5 +1,6 @@
 import os
 from functools import wraps
+
 from flask import Flask, render_template, redirect, url_for, flash, abort
 from flask_bootstrap import Bootstrap
 from flask_gravatar import Gravatar
@@ -9,6 +10,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from forms import AddBeerForm, ReviewForm, RegisterForm, LoginForm, CommentForm, ForgotPasswordForm, ChangePasswordForm
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql.expression import desc
 
 import random
 import string
@@ -329,7 +331,10 @@ def home():
 @app.route('/beers')
 def beers():
     home_beer_list = []
-    beer_name_list = [beer.name for beer in Beer.query.filter_by(version=1)]
+    beers_query = Beer.query.filter_by(version=1)
+    desc_expression = desc(Beer.score)
+    order_by_query = beers_query.order_by(desc_expression)
+    beer_name_list = [beer.name for beer in order_by_query]
     for name in beer_name_list:
         versioned_beers = Beer.query.filter_by(name=name)
         versions_list = [beer.version for beer in versioned_beers]
