@@ -871,6 +871,11 @@ def contact():
     return render_template("contact.html")
 
 
+@app.route("/order", methods=['GET', 'POST'])
+def order():
+    return render_template("order.html")
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=False)
 
