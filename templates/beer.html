@@ -2,238 +2,422 @@
 
 {% include "header.html" %}
 
-<!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container">
 
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">{{ beer.name }}<span class="text-version">
-        {% if n_versions > 1 %}
-        (v{{ beer.version }})
-        {% endif %}
-        - {{ beer.type }}</span></h1>
+{% include "navbar.html" %}
 
-    {% if n_versions > 1 %}
-        <p class="text-version">Versions :
-            {% for version in all_versions %}
-            <a class="ml-1 text-version text-primary" href="{{ url_for('beer', beer_id=version.id) }}">v{{ version.version }}</a>
-            {% endfor %}
-        </p>
-    {% endif %}
+    <div>
+      <div class="bg-light p-5 rounded">
+        <!-- Title -->
+        <div class="col-sm-8 mx-auto">
 
-    <p class="mb-4 mt-4 .text-wrap">
-        {{ beer.description }}
-    </p>
-
-    <!-- Content Row -->
-    <div class="row">
-
-        <!-- Card -->
-        <div class="col-lg-6">
-
-            <!-- Project Card Example -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    {% if is_reviewed %}
-                        <h6 class="m-0 font-weight-bold text-primary">
-                            Note globale <a class="btn btn-primary degustez ml-1" href="{{ url_for('review_edit', beer_id=beer.id, review_id=review_id) }}" role="button">Modifier</a>
-                            <span class="text-deja ml-1">(Vous avez déjà créé une fiche de dégustation)</span>
+            <div class="d-flex align-items-end mb-2">
+                {% if n_versions <= 1 %}
+                    <h1 class="flex-grow-1 mb-0">{{ beer.name }}</h1>
+                {% else %}
+                    <h1 class="mb-0">{{ beer.name }}</h1>
+                    <div class="flex-grow-1">
+                    {% for version in all_versions %}
+                        <a href="{{ url_for('beer', beer_id=version.id) }}">v{{ version.version }}</a>
+                    {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="d-flex align-items-center">
+                    {% if n_reviews != 0 %}
+                        {% if beer.score == 0 %}
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        {% elif beer.score <= 1 %}
+                            <i class="fa-regular fa-star-half-stroke"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        {% elif beer.score <= 2 %}
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        {% elif beer.score <= 3 %}
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star-half-stroke"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        {% elif beer.score <= 4 %}
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        {% elif beer.score <= 5 %}
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star-half-stroke"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        {% elif beer.score <= 6 %}
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        {% elif beer.score <= 7 %}
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star-half-stroke"></i>
+                            <i class="fa-regular fa-star"></i>
+                        {% elif beer.score <= 8 %}
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        {% elif beer.score <= 9 %}
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star-half-stroke"></i>
+                        {% elif beer.score <= 10 %}
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        {% endif %}
+                        <h6 class="p-2 mb-0">
+                        {{ beer.score }} / 10 ({{ n_reviews }} avis)
                         </h6>
                     {% else %}
-                        <h6 class="m-0 font-weight-bold text-primary">
-                            Note globale <a class="btn btn-warning degustez ml-1" href="{{ url_for('review', beer_id=beer.id) }}" role="button">Dégustez!</a>
+                        <h6 class="p-2 mb-0">
+                        ({{ n_reviews }} avis)
                         </h6>
                     {% endif %}
                 </div>
+            </div>
 
-                <div class="card-body">
-                    <h4 class="small font-weight-bold text-center">
-                         {{ beer.score }} / 10 ({{ n_reviews }} avis)
-                    </h4>
-                    <div class="progress mb-4">
-                        {% if beer.score is not none %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.score*10 }}%"
-                            aria-valuenow="{{ beer.score*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% else %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
-                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% endif %}
-                    </div>
+            <div class="d-flex align-items-end">
+                <h4 class="flex-grow-1 mb-0">
+                    {{ beer.type }}
+                </h4>
+                <div>
+                    {% if is_reviewed %}
+                        <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('review_edit_fetch',
+                        beer_id=beer.id, review_id=review_id) }}">Modifier fiche de dégustation</a>
+                    {% else %}
+                        <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('review', beer_id=beer.id, scroll='None',
+                        new_mousse=0, new_couleur=0, new_opacite=0, new_douceur=0, new_amertume=0, new_acidite=0,
+                        new_gushing=0, new_alcoolique=0, new_ethere=0, new_fruite=0, new_floral=0, new_houblonne=0,
+                        new_resineux=0, new_noix=0, new_herbeux=0, new_cereales=0, new_caramel=0, new_brule=0, new_score=0) }}">Déguster</a>
+                    {% endif %}
                 </div>
             </div>
 
-            <!-- Project Card Example -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        Robe
-                    </h6>
-                </div>
+            <hr>
 
-                <div class="card-body">
-                    <h4 class="small font-weight-bold text-center">
-                        <span class="float-left">Inexistante</span>
-                        Mousse
-                        <span class="float-right">Persistante</span>
-                    </h4>
-                    <div class="progress mb-4">
-                        {% if beer.mousse is not none %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.mousse*10 }}%"
-                            aria-valuenow="{{ beer.mousse*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% else %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
-                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% endif %}
-                    </div>
+            <p>
+                {{ beer.description }}
+            </p>
 
-                    <h4 class="small font-weight-bold text-center">
-                        <span class="float-left">Foncée</span>
-                        Couleur
-                        <span class="float-right">Claire</span>
-                    </h4>
-                    <div class="progress mb-4">
-                        {% if beer.couleur is not none %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.couleur*10 }}%"
-                            aria-valuenow="{{ beer.couleur*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% else %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
-                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% endif %}
-                    </div>
-
-                    <h4 class="small font-weight-bold text-center">
-                        <span class="float-left">Opaque</span>
-                        Transparence
-                        <span class="float-right">Transparente</span>
-                    </h4>
-                    <div class="progress mb-4">
-                        {% if beer.transparence is not none %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.transparence*10 }}%"
-                            aria-valuenow="{{ beer.transparence*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% else %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
-                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project Card Example -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Bouche</h6>
-                </div>
-
-                <div class="card-body">
-                    <h4 class="small font-weight-bold text-center">Douceur</h4>
-                    <div class="progress mb-4">
-                        {% if beer.douceur is not none %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.douceur*10 }}%"
-                            aria-valuenow="{{ beer.douceur*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% else %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
-                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% endif %}
-                    </div>
-
-                    <h4 class="small font-weight-bold text-center">Acidité</h4>
-                    <div class="progress mb-4">
-                        {% if beer.acidite is not none %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.acidite*10 }}%"
-                            aria-valuenow="{{ beer.acidite*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% else %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
-                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% endif %}
-                    </div>
-
-                    <h4 class="small font-weight-bold text-center">Amertume</h4>
-                    <div class="progress mb-4">
-                        {% if beer.amertume is not none %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.amertume*10 }}%"
-                            aria-valuenow="{{ beer.amertume*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% else %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
-                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% endif %}
-                    </div>
-
-                    <h4 class="small font-weight-bold text-center">Rondeur</h4>
-                    <div class="progress mb-4">
-                        {% if beer.rondeur is not none %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.rondeur*10 }}%"
-                            aria-valuenow="{{ beer.rondeur*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% else %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
-                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Surmoussage à l'ouverture (Gushing)</h6>
-                </div>
-                <div class="card-body">
-                    <h4 class="small font-weight-bold text-center">
-                        <span class="float-left">Normal</span>
-                        Surmoussage
-                        <span class="float-right">Explosif</span>
-                    </h4>
-                    <div class="progress mb-4">
-                        {% if beer.gushing is not none %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer.gushing*10 }}%"
-                            aria-valuenow="{{ beer.gushing*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% else %}
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0"
-                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
+            <hr>
 
         </div>
 
         <!-- Stats -->
-        <div class="col-lg-6">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Nez</h6>
-                </div>
-                <div class="card-body">
-                    <div class="chart-area">
-                        <canvas id="myAreaChart"></canvas>
+          <div class="row">
+            <div class="col-8 mx-auto">
+                <div class="row mb-3">
+                    <div class="col-6 mx-auto">
+                        <div class="card">
+                            <div class="card-header"><strong>Robe</strong></div>
+                            <div class="card-body">
+
+                                <h6 class="card-title mb-1">Mousse</h6>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 align-self-center p-0">
+                                        <div class="progress">
+                                            {% if beer.mousse is not none %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ beer.mousse*10 }}%"
+                                                aria-valuenow="{{ beer.mousse*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% else %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 0"
+                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 p-0 text-center">
+                                        <div class="row mx-auto justify-content-between">
+                                            <div class="col-1 p-0">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </div>
+                                            <div class="col-1 p-0">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h6 class="card-title mb-1 mt-2">Couleur</h6>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 align-self-center p-0">
+                                        <div class="progress">
+                                            {% if beer.couleur is not none %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ beer.couleur*10 }}%"
+                                                aria-valuenow="{{ beer.couleur*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% else %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 0"
+                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 p-0 text-center">
+                                        <div class="row mx-auto justify-content-center">
+                                            <div class="col p-0">
+                                                <i class="fa-solid fa-circle" style="color: #FFE699"></i>
+                                            </div>
+                                            <div class="col p-0">
+                                                <i class="fa-solid fa-circle" style="color: #FBB123"></i>
+                                            </div>
+                                            <div class="col p-0">
+                                                <i class="fa-solid fa-circle" style="color: #E58500"></i>
+                                            </div>
+                                            <div class="col p-0">
+                                                <i class="fa-solid fa-circle" style="color: #CB6200"></i>
+                                            </div>
+                                            <div class="col p-0">
+                                                <i class="fa-solid fa-circle" style="color: #B04500"></i>
+                                            </div>
+                                            <div class="col p-0">
+                                                <i class="fa-solid fa-circle" style="color: #952D00"></i>
+                                            </div>
+                                            <div class="col p-0">
+                                                <i class="fa-solid fa-circle" style="color: #7B1A00"></i>
+                                            </div>
+                                            <div class="col p-0">
+                                                <i class="fa-solid fa-circle" style="color: #660D00"></i>
+                                            </div>
+                                            <div class="col p-0">
+                                                <i class="fa-solid fa-circle" style="color: #520907"></i>
+                                            </div>
+                                            <div class="col p-0">
+                                                <i class="fa-solid fa-circle" style="color: #3F0708"></i>
+                                            </div>
+                                            <div class="col p-0">
+                                                <i class="fa-solid fa-circle" style="color: #36080A"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h6 class="card-title mb-1 mt-2">Opacité</h6>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 align-self-center p-0">
+                                        <div class="progress">
+                                            {% if beer.opacite is not none %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ beer.opacite*10 }}%"
+                                                aria-valuenow="{{ beer.opacite*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% else %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 0"
+                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 p-0 text-center">
+                                        <div class="row mx-auto justify-content-between">
+                                            <div class="col-1 p-0">
+                                                <i class="fa-regular fa-circle"></i>
+                                            </div>
+                                            <div class="col-1 p-0">
+                                                <i class="fa-solid fa-circle"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h6 class="card-title mb-1 mt-2">Gushing (Surmoussage à l'ouverture)</h6>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 align-self-center p-0">
+                                        <div class="progress">
+                                            {% if beer.gushing is not none %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ beer.gushing*10 }}%"
+                                                aria-valuenow="{{ beer.gushing*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% else %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 0"
+                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 p-0 text-center">
+                                        <div class="row mx-auto justify-content-between">
+                                            <div class="col-1 p-0">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </div>
+                                            <div class="col-1 p-0">
+                                                <i class="fa-solid fa-burst"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 mx-auto">
+                        <div class="card">
+                            <div class="card-header"><strong>Bouche</strong></div>
+                            <div class="card-body">
+
+                                <h6 class="card-title mb-1">Douceur</h6>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 align-self-center p-0">
+                                        <div class="progress">
+                                            {% if beer.douceur is not none %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ beer.douceur*10 }}%"
+                                                aria-valuenow="{{ beer.douceur*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% else %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 0"
+                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 p-0 text-center">
+                                        <div class="row mx-auto justify-content-between">
+                                            <div class="col-1 p-0">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </div>
+                                            <div class="col-1 p-0">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h6 class="card-title mb-1 mt-2">Acidité</h6>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 align-self-center p-0">
+                                        <div class="progress">
+                                            {% if beer.acidite is not none %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ beer.acidite*10 }}%"
+                                                aria-valuenow="{{ beer.acidite*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% else %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 0"
+                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 p-0 text-center">
+                                        <div class="row mx-auto justify-content-between">
+                                            <div class="col-1 p-0">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </div>
+                                            <div class="col-1 p-0">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h6 class="card-title mb-1 mt-2">Amertume</h6>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 align-self-center p-0">
+                                        <div class="progress">
+                                            {% if beer.amertume is not none %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ beer.amertume*10 }}%"
+                                                aria-valuenow="{{ beer.amertume*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% else %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 0"
+                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 p-0 text-center">
+                                        <div class="row mx-auto justify-content-between">
+                                            <div class="col-1 p-0">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </div>
+                                            <div class="col-1 p-0">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="row mb-3">
+                    <div class="col-12 mx-auto">
+                        <div class="card">
+                            <div class="card-header"><strong>Nez</strong></div>
+                            <div class="card-body">
+                                <div class="chart-area">
+                                <canvas id="myAreaChart"></canvas>
+                                </div>
+                                {% include "radar-chart.html" %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 mx-auto">
+                        <div class="card">
+                            <div class="card-header"><strong>Commentaires</strong></div>
+                            <div class="card-body">
+                                {% for comment in comments %}
+                                    <div>
+                                        <p>"{{ comment.text }}" <span class="blockquote-footer"><strong><em>{{ comment.comment_author.name }}</em></strong> </span>
+
+                                    {% if current_user.is_authenticated %}
+                                        {% if ( comment.comment_author == current_user or current_user.is_admin == True ) %}
+                                            <span class="p-2">
+                                            <a href="{{ url_for('edit_comment', comment_id=comment.id) }}"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ url_for('delete_comment', comment_id=comment.id) }}"><i class="fas fa-trash-alt"></i></a>
+                                            </span>
+                                        {% endif %}
+                                    {% endif %}
+                                        </p>
+                                    </div>
+                                {% endfor %}
+
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('add_comment', beer_id=beer.id) }}">Ajouter un commentaire</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Commentaires</h6>
-                </div>
-                <div class="card-body">
-                    {% for comment in comments %}
-                    <div class="mb-2">
-                        <span class="comment-author small font-weight-bold mb-0">{{ comment.comment_author.name }} : </span>
-                        <span class="comment-text small">{{ comment.text }}</span>
-                        {% if current_user.is_authenticated %}
-                            {% if comment.comment_author == current_user %}
-                            <a class="small comment-icons ml-2" href="{{ url_for('edit_comment', comment_id=comment.id) }}"><i class="fas fa-edit"></i></a>
-                            <a class="small comment-icons" href="{{ url_for('delete_comment', comment_id=comment.id) }}"><i class="fas fa-trash-alt"></i></a>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-                    <hr>
-                    <a class="btn btn-primary degustez ml-1" href="{{ url_for('add_comment', beer_id=beer.id) }}" role="button">Ajouter un commentaire</a>
-                </div>
-            </div>
-        </div>
+          </div>
+
+
+
+      </div>
     </div>
-
 </div>
-<!-- /.container-fluid -->
-
-{% include "radar-chart.html" %}
 
 {% include "footer.html" %}

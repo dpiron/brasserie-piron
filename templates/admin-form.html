@@ -3,21 +3,39 @@
 {% include "header.html" %}
 
 <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto mt-5 mb-5">
 
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <p>{{ message }}</p>
-            {% endfor %}
-        {% endif %}
-      {% endwith %}
+{% include "navbar.html" %}
 
-      {{ wtf.render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+    <!-- Login block -->
+    <div>
+      <div class="bg-light p-5 rounded">
+        <div class="col-sm-8 mx-auto">
+          <h1>Admin</h1>
+            <hr>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="flash-mess">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {{ wtf.render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+
+            <hr>
+
+            <a class="btn btn-primary" href="{{ url_for('admin') }}" role="button">Retour à Admin</a>
+        </div>
+
 
       </div>
     </div>
-</div>
+
+
+
+
+
+  </div>
 
 {% include "footer.html" %}

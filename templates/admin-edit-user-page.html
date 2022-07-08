@@ -1,0 +1,52 @@
+{% include "header.html" %}
+
+<div class="container">
+
+{% include "navbar.html" %}
+
+    <!-- Title -->
+    <div>
+      <div class="bg-light p-5 rounded">
+        <div class="col-sm-8 mx-auto">
+          <h1>Admin</h1>
+
+            <hr>
+
+            <h2>Liste des utilisateurs</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Nom</th>
+                        <th>Admin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td class="align-middle">{{ user.email }}</td>
+                        <td class="align-middle">{{ user.name }}</td>
+                        <td class="align-middle">{{ user.is_admin }}</td>
+                        <td class="align-middle">
+                            <a class="btn btn-sm btn-warning" href="{{ url_for('admin_edit_user', user_id=user.id) }}">Changer statut admin</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <hr>
+
+            <a class="btn btn-primary" href="{{ url_for('admin') }}" role="button">Retour à Admin</a>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+
+{% include "footer.html" %}

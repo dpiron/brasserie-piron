@@ -1,25 +1,41 @@
 {% include "header.html" %}
 
-<!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container">
 
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Admin</h1>
+{% include "navbar.html" %}
+
+    <!-- Title -->
+    <div>
+      <div class="bg-light p-5 rounded">
+        <div class="col-sm-8 mx-auto">
+          <h1>Admin</h1>
+            <hr>
+
+            <h2>Bières</h2>
+            <a class="btn btn-primary" href="{{ url_for('admin_add_beer_page') }}" role="button">Ajouter une bière</a>
+            <a class="btn btn-warning" href="{{ url_for('admin_edit_beer_page') }}" role="button">Modifier une bière</a>
+            <a class="btn btn-danger" href="{{ url_for('admin_delete_beer_page') }}" role="button">Supprimer une bière</a>
+
+            <hr>
+
+            <h2>Fiches de dégustation</h2>
+            <a class="btn btn-warning" href="{{ url_for('admin_edit_review_page') }}" role="button">Modifier une fiche</a>
+            <a class="btn btn-danger" href="{{ url_for('admin_delete_review_page') }}" role="button">Supprimer une fiche</a>
+
+            <hr>
+
+            <h2>Utilisateurs</h2>
+            <a class="btn btn-warning" href="{{ url_for('admin_edit_user_page') }}" role="button">Modifier Admins</a>
+            <a class="btn btn-danger" href="{{ url_for('admin_delete_user_page') }}" role="button">Supprimer utilisateur</a>
+
+        </div>
+      </div>
     </div>
 
-    <h2>Bières</h2>
-    <div class="m-2"><a class="btn btn-primary" href="{{ url_for('admin_add_beer_page') }}" role="button">Ajouter une bière</a></div>
-    <div class="m-2"><a class="btn btn-warning" href="{{ url_for('admin_edit_beer_page') }}" role="button">Modifier une bière</a></div>
-    <div class="m-2"><a class="btn btn-danger" href="{{ url_for('admin_delete_beer_page') }}" role="button">Supprimer une bière</a></div>
 
-    <hr>
 
-    <h2>Fiches de dégustation</h2>
-    <div class="m-2"><a class="btn btn-warning" href="{{ url_for('admin_edit_review_page') }}" role="button">Modifier une fiche</a></div>
-    <div class="m-2"><a class="btn btn-danger" href="{{ url_for('admin_delete_review_page') }}" role="button">Supprimer une fiche</a></div>
 
-</div>
-<!-- /.container-fluid -->
+
+  </div>
 
 {% include "footer.html" %}

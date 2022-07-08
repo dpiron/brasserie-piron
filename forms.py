@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, IntegerField, BooleanField, FloatField, DecimalField
+from wtforms import StringField, SubmitField, PasswordField, IntegerField, BooleanField, FloatField, DecimalField, HiddenField
 from wtforms.validators import DataRequired, URL, optional, NumberRange, Email
 from flask_ckeditor import CKEditorField
 
@@ -8,13 +8,23 @@ class RegisterForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()])
     password = PasswordField("Mot de passe", validators=[DataRequired()])
     name = StringField("Nom", validators=[DataRequired()])
-    submit = SubmitField("S'enregistrer")
+    submit = SubmitField("S'inscrire")
 
 
 class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()])
     password = PasswordField("Mot de passe", validators=[DataRequired()])
     submit = SubmitField("S'identifier")
+
+
+class ForgotPasswordForm(FlaskForm):
+    email = StringField("Email", validators=[DataRequired(), Email()])
+    submit = SubmitField("Réinitialiser mot de passe")
+
+
+class ChangePasswordForm(FlaskForm):
+    password = PasswordField("Nouveau mot de passe", validators=[DataRequired()])
+    submit = SubmitField("Modifier le mot de passe")
 
 
 class AddBeerForm(FlaskForm):
@@ -26,28 +36,27 @@ class AddBeerForm(FlaskForm):
 
 
 class ReviewForm(FlaskForm):
-    mousse = IntegerField("Mousse (0 = Inexistante, 10 = Persistante)", validators=[optional(), NumberRange(min=0, max=10)])
-    couleur = IntegerField("Couleur (0 = Foncée, 10 = Claire)", validators=[optional(), NumberRange(min=0, max=10)])
-    transparence = IntegerField("Transparence (0 = Opaque, 10 = Transparente)", validators=[optional(), NumberRange(min=0, max=10)])
-    douceur = IntegerField("Douceur (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
-    amertume = IntegerField("Amertume (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
-    acidite = IntegerField("Acidité (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
-    rondeur = IntegerField("Rondeur (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
-    gushing = IntegerField("Surmoussage (0 = Normal, 10 = Explosif)", validators=[optional(), NumberRange(min=0, max=10)])
+    mousse = HiddenField("Mousse")
+    couleur = HiddenField("Couleur")
+    opacite = HiddenField("Opacité")
+    douceur = HiddenField("Douceur")
+    amertume = HiddenField("Amertume")
+    acidite = HiddenField("Acidité")
+    gushing = HiddenField("Surmoussage")
 
-    alcoolique = IntegerField("Alcoolique (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
-    ethere = IntegerField("Éthéré : banane, pomme (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
-    fruite = IntegerField("Fruité : agrumes, baies, melon, autres fruits (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
-    floral = IntegerField("Floral : fleurs, roses, parfum, vanille (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
-    houblonne = IntegerField("Houblonné (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
-    resineux = IntegerField("Résineux : sciure, résine, pin, épicéa, bois sec (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
-    noix = IntegerField("Noix (noix de cajou, noix, noisette, noix de coco (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
-    herbeux = IntegerField("Herbeux : (herbe fraichement coupée, paille) (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
-    cereales = IntegerField("Céréales : céréales crues, balle du grain, gruau, farine (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
-    caramel = IntegerField("Caramel (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
-    brule = IntegerField("Brulé (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
+    alcoolique = HiddenField("Alcoolique")
+    ethere = HiddenField("Éthéré : banane, pomme")
+    fruite = HiddenField("Fruité : agrumes, baies, melon, autres fruits")
+    floral = HiddenField("Floral : fleurs, roses, parfum, vanille")
+    houblonne = HiddenField("Houblonné")
+    resineux = HiddenField("Résineux : sciure, résine, pin, épicéa, bois sec")
+    noix = HiddenField("Noix : noix de cajou, noix, noisette, noix de coco")
+    herbeux = HiddenField("Herbeux : herbe fraichement coupée, paille")
+    cereales = HiddenField("Céréales : céréales crues, balle du grain, gruau, farine")
+    caramel = HiddenField("Caramel")
+    brule = HiddenField("Brulé")
 
-    score = IntegerField("Note globale (0-10)", validators=[optional(), NumberRange(min=0, max=10)])
+    score = HiddenField("Note globale")
 
     submit = SubmitField("OK")
 
