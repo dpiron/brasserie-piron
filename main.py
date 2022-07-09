@@ -390,7 +390,7 @@ def admin_add_beer():
         new_beer = Beer(
             name=form.name.data,
             type=form.type.data,
-            version=form.version.data,
+            version=1, # form.version.data,
             description=form.description.data,
             score=0
         )
@@ -414,13 +414,13 @@ def admin_edit_beer(beer_id):
     edit_form = AddBeerForm(
         name=beer_to_edit.name,
         type=beer_to_edit.type,
-        version=beer_to_edit.version,
+        # version=beer_to_edit.version,
         description=beer_to_edit.description
     )
     if edit_form.validate_on_submit():
         beer_to_edit.name = edit_form.name.data
         beer_to_edit.type = edit_form.type.data
-        beer_to_edit.version = edit_form.version.data
+        beer_to_edit.version = 1,  # edit_form.version.data
         beer_to_edit.description = edit_form.description.data
         db.session.commit()
         return redirect(url_for("admin_edit_beer_page"))

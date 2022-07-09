@@ -12,8 +12,9 @@
         <div class="col-sm-8 mx-auto">
 
             <div class="d-flex align-items-end mb-2">
-                {% if n_versions <= 1 %}
+                <!-- {% if n_versions <= 1 %} -->
                     <h1 class="flex-grow-1 mb-0">{{ beer.name }}</h1>
+                <!--
                 {% else %}
                     <h1 class="mb-0">{{ beer.name }}</h1>
                     <div class="flex-grow-1">
@@ -22,6 +23,7 @@
                     {% endfor %}
                     </div>
                 {% endif %}
+                -->
                 <div class="d-flex align-items-center">
                     {% if n_reviews != 0 %}
                         {% if beer.score == 0 %}
