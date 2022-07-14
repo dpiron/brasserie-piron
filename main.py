@@ -70,7 +70,7 @@ class Beer(db.Model):
     floral = db.Column(db.Float)
     houblonne = db.Column(db.Float)
     resineux = db.Column(db.Float)
-    noix = db.Column(db.Float)
+    chocolat = db.Column(db.Float)
     herbeux = db.Column(db.Float)
     cereales = db.Column(db.Float)
     caramel = db.Column(db.Float)
@@ -104,7 +104,7 @@ class Review(db.Model):
     floral = db.Column(db.Integer)
     houblonne = db.Column(db.Integer)
     resineux = db.Column(db.Integer)
-    noix = db.Column(db.Integer)
+    chocolat = db.Column(db.Integer)
     herbeux = db.Column(db.Integer)
     cereales = db.Column(db.Integer)
     caramel = db.Column(db.Integer)
@@ -575,9 +575,9 @@ def recalculate_beer(beer_to_be_reviewed, all_reviews):
     resineux_avg = get_avg(resineux_list)
     beer_to_be_reviewed.resineux = resineux_avg
 
-    noix_list = [review.noix for review in all_reviews]
-    noix_avg = get_avg(noix_list)
-    beer_to_be_reviewed.noix = noix_avg
+    chocolat_list = [review.chocolat for review in all_reviews]
+    chocolat_avg = get_avg(chocolat_list)
+    beer_to_be_reviewed.chocolat = chocolat_avg
 
     herbeux_list = [review.herbeux for review in all_reviews]
     herbeux_avg = get_avg(herbeux_list)
@@ -605,7 +605,7 @@ def recalculate_beer(beer_to_be_reviewed, all_reviews):
 @app.route("/review/<int:beer_id>/<int:new_mousse>/<int:new_couleur>/<int:new_opacite>/"
            "<int:new_douceur>/<int:new_amertume>/<int:new_acidite>/<int:new_gushing>/"
            "<int:new_alcoolique>/<int:new_ethere>/<int:new_fruite>/<int:new_floral>/"
-           "<int:new_houblonne>/<int:new_resineux>/<int:new_noix>/<int:new_herbeux>/"
+           "<int:new_houblonne>/<int:new_resineux>/<int:new_chocolat>/<int:new_herbeux>/"
            "<int:new_cereales>/<int:new_caramel>/<int:new_brule>/<int:new_score>/"
            "<string:scroll>",
            methods=['GET', 'POST'])
@@ -623,7 +623,7 @@ def review(beer_id,
            new_floral,
            new_houblonne,
            new_resineux,
-           new_noix,
+           new_chocolat,
            new_herbeux,
            new_cereales,
            new_caramel,
@@ -649,7 +649,7 @@ def review(beer_id,
     form.floral.data = new_floral
     form.houblonne.data = new_houblonne
     form.resineux.data = new_resineux
-    form.noix.data = new_noix
+    form.chocolat.data = new_chocolat
     form.herbeux.data = new_herbeux
     form.cereales.data = new_cereales
     form.caramel.data = new_caramel
@@ -676,7 +676,7 @@ def review(beer_id,
             floral=form.floral.data,
             houblonne=form.houblonne.data,
             resineux=form.resineux.data,
-            noix=form.noix.data,
+            chocolat=form.chocolat.data,
             herbeux=form.herbeux.data,
             cereales=form.cereales.data,
             caramel=form.caramel.data,
@@ -708,7 +708,7 @@ def review(beer_id,
                            new_floral=new_floral,
                            new_houblonne=new_houblonne,
                            new_resineux=new_resineux,
-                           new_noix=new_noix,
+                           new_chocolat=new_chocolat,
                            new_herbeux=new_herbeux,
                            new_cereales=new_cereales,
                            new_caramel=new_caramel,
@@ -733,7 +733,7 @@ def review_edit_fetch(review_id):
     new_floral = review_to_edit.floral
     new_houblonne = review_to_edit.houblonne
     new_resineux = review_to_edit.resineux
-    new_noix = review_to_edit.noix
+    new_chocolat = review_to_edit.chocolat
     new_herbeux = review_to_edit.herbeux
     new_cereales = review_to_edit.cereales
     new_caramel = review_to_edit.caramel
@@ -744,7 +744,7 @@ def review_edit_fetch(review_id):
                             new_douceur=new_douceur, new_amertume=new_amertume, new_acidite=new_acidite,
                             new_gushing=new_gushing, new_alcoolique=new_alcoolique, new_ethere=new_ethere,
                             new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
-                            new_resineux=new_resineux, new_noix=new_noix, new_herbeux=new_herbeux,
+                            new_resineux=new_resineux, new_chocolat=new_chocolat, new_herbeux=new_herbeux,
                             new_cereales=new_cereales, new_caramel=new_caramel, new_brule=new_brule,
                             new_score=new_score, scroll='None'))
 
@@ -752,7 +752,7 @@ def review_edit_fetch(review_id):
 @app.route("/review-edit/<int:review_id>/<int:new_mousse>/<int:new_couleur>/<int:new_opacite>/"
            "<int:new_douceur>/<int:new_amertume>/<int:new_acidite>/<int:new_gushing>/"
            "<int:new_alcoolique>/<int:new_ethere>/<int:new_fruite>/<int:new_floral>/"
-           "<int:new_houblonne>/<int:new_resineux>/<int:new_noix>/<int:new_herbeux>/"
+           "<int:new_houblonne>/<int:new_resineux>/<int:new_chocolat>/<int:new_herbeux>/"
            "<int:new_cereales>/<int:new_caramel>/<int:new_brule>/<int:new_score>/"
            "<string:scroll>",
            methods=['GET', 'POST'])
@@ -761,7 +761,7 @@ def review_edit(review_id,
                 new_amertume, new_acidite, new_gushing,
                 new_alcoolique, new_ethere, new_fruite,
                 new_floral, new_houblonne, new_resineux,
-                new_noix, new_herbeux, new_cereales,
+                new_chocolat, new_herbeux, new_cereales,
                 new_caramel, new_brule, new_score, scroll):
     review_to_edit = Review.query.get(review_id)
     beer_to_be_reviewed = review_to_edit.reviews_beer
@@ -780,7 +780,7 @@ def review_edit(review_id,
     form.floral.data = new_floral
     form.houblonne.data = new_houblonne
     form.resineux.data = new_resineux
-    form.noix.data = new_noix
+    form.chocolat.data = new_chocolat
     form.herbeux.data = new_herbeux
     form.cereales.data = new_cereales
     form.caramel.data = new_caramel
@@ -802,7 +802,7 @@ def review_edit(review_id,
         review_to_edit.floral = form.floral.data
         review_to_edit.houblonne = form.houblonne.data
         review_to_edit.resineux = form.resineux.data
-        review_to_edit.noix = form.noix.data
+        review_to_edit.chocolat = form.chocolat.data
         review_to_edit.herbeux = form.herbeux.data
         review_to_edit.cereales = form.cereales.data
         review_to_edit.caramel = form.caramel.data
@@ -823,7 +823,7 @@ def review_edit(review_id,
                            new_douceur=new_douceur, new_amertume=new_amertume, new_acidite=new_acidite,
                            new_gushing=new_gushing, new_alcoolique=new_alcoolique, new_ethere=new_ethere,
                            new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
-                           new_resineux=new_resineux, new_noix=new_noix, new_herbeux=new_herbeux,
+                           new_resineux=new_resineux, new_chocolat=new_chocolat, new_herbeux=new_herbeux,
                            new_cereales=new_cereales, new_caramel=new_caramel,
                            new_brule=new_brule, new_score=new_score)
 

@@ -50,7 +50,7 @@ class ReviewForm(FlaskForm):
     floral = HiddenField("Floral : fleurs, roses, parfum, vanille")
     houblonne = HiddenField("Houblonné")
     resineux = HiddenField("Résineux : sciure, résine, pin, épicéa, bois sec")
-    noix = HiddenField("Noix : noix de cajou, noix, noisette, noix de coco")
+    chocolat = HiddenField()
     herbeux = HiddenField("Herbeux : herbe fraichement coupée, paille")
     cereales = HiddenField("Céréales : céréales crues, balle du grain, gruau, farine")
     caramel = HiddenField("Caramel")
