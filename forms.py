@@ -39,6 +39,7 @@ class ReviewForm(FlaskForm):
     mousse = HiddenField("Mousse")
     couleur = HiddenField("Couleur")
     opacite = HiddenField("Opacité")
+    petillant = HiddenField("Pétillant")
     douceur = HiddenField("Douceur")
     amertume = HiddenField("Amertume")
     acidite = HiddenField("Acidité")

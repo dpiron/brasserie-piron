@@ -114,7 +114,7 @@
                         beer_id=beer.id, review_id=review_id) }}">Modifier fiche de dégustation</a>
                     {% else %}
                         <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('review', beer_id=beer.id, scroll='None',
-                        new_mousse=0, new_couleur=0, new_opacite=0, new_douceur=0, new_amertume=0, new_acidite=0,
+                        new_mousse=0, new_couleur=0, new_opacite=0, new_petillant=0, new_douceur=0, new_amertume=0, new_acidite=0,
                         new_gushing=0, new_alcooleux=0, new_ethere=0, new_fruite=0, new_floral=0, new_houblonne=0,
                         new_resineux=0, new_chocolat=0, new_herbeux=0, new_cereales=0, new_caramel=0, new_brule=0, new_score=0) }}">Déguster</a>
                     {% endif %}
@@ -140,13 +140,13 @@
                             <div class="card-header"><strong>Robe</strong></div>
                             <div class="card-body">
 
-                                <h6 class="card-title mb-1">Mousse</h6>
+                                <h6 class="card-title mb-1 mt-2">Gushing (Surmoussage à l'ouverture)</h6>
                                 <div class="row mx-auto justify-content-center">
                                     <div class="col-12 align-self-center p-0">
                                         <div class="progress">
-                                            {% if beer.mousse is not none %}
-                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ beer.mousse*10 }}%"
-                                                aria-valuenow="{{ beer.mousse*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% if beer.gushing is not none %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ beer.gushing*10 }}%"
+                                                aria-valuenow="{{ beer.gushing*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                             {% else %}
                                             <div class="progress-bar bg-secondary" role="progressbar" style="width: 0"
                                                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -161,7 +161,7 @@
                                                 <i class="fa-solid fa-minus"></i>
                                             </div>
                                             <div class="col-1 p-0">
-                                                <i class="fa-solid fa-plus"></i>
+                                                <i class="fa-solid fa-burst"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -248,13 +248,13 @@
                                     </div>
                                 </div>
 
-                                <h6 class="card-title mb-1 mt-2">Gushing (Surmoussage à l'ouverture)</h6>
+                                <h6 class="card-title mb-1 mt-2">Mousse</h6>
                                 <div class="row mx-auto justify-content-center">
                                     <div class="col-12 align-self-center p-0">
                                         <div class="progress">
-                                            {% if beer.gushing is not none %}
-                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ beer.gushing*10 }}%"
-                                                aria-valuenow="{{ beer.gushing*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% if beer.mousse is not none %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ beer.mousse*10 }}%"
+                                                aria-valuenow="{{ beer.mousse*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                             {% else %}
                                             <div class="progress-bar bg-secondary" role="progressbar" style="width: 0"
                                                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -269,7 +269,7 @@
                                                 <i class="fa-solid fa-minus"></i>
                                             </div>
                                             <div class="col-1 p-0">
-                                                <i class="fa-solid fa-burst"></i>
+                                                <i class="fa-solid fa-plus"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -284,7 +284,34 @@
                             <div class="card-header"><strong>Bouche</strong></div>
                             <div class="card-body">
 
-                                <h6 class="card-title mb-1">Douceur</h6>
+                                <h6 class="card-title mb-1 mt-2">Pétillant</h6>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 align-self-center p-0">
+                                        <div class="progress">
+                                            {% if beer.petillant is not none %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ beer.petillant*10 }}%"
+                                                aria-valuenow="{{ beer.petillant*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% else %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 0"
+                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-12 p-0 text-center">
+                                        <div class="row mx-auto justify-content-between">
+                                            <div class="col-1 p-0">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </div>
+                                            <div class="col-1 p-0">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h6 class="card-title mb-1 mt-2">Douceur</h6>
                                 <div class="row mx-auto justify-content-center">
                                     <div class="col-12 align-self-center p-0">
                                         <div class="progress">

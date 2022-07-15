@@ -59,6 +59,7 @@ class Beer(db.Model):
     mousse = db.Column(db.Float)
     couleur = db.Column(db.Float)
     opacite = db.Column(db.Float)
+    petillant = db.Column(db.Float)
     douceur = db.Column(db.Float)
     amertume = db.Column(db.Float)
     acidite = db.Column(db.Float)
@@ -93,6 +94,7 @@ class Review(db.Model):
     mousse = db.Column(db.Integer)
     couleur = db.Column(db.Integer)
     opacite = db.Column(db.Integer)
+    petillant = db.Column(db.Integer)
     douceur = db.Column(db.Integer)
     amertume = db.Column(db.Integer)
     acidite = db.Column(db.Integer)
@@ -535,6 +537,10 @@ def recalculate_beer(beer_to_be_reviewed, all_reviews):
     opacite_avg = get_avg(opacite_list)
     beer_to_be_reviewed.opacite = opacite_avg
 
+    petillant_list = [review.petillant for review in all_reviews]
+    petillant_avg = get_avg(petillant_list)
+    beer_to_be_reviewed.petillant = petillant_avg
+
     douceur_list = [review.douceur for review in all_reviews]
     douceur_avg = get_avg(douceur_list)
     beer_to_be_reviewed.douceur = douceur_avg
@@ -603,7 +609,7 @@ def recalculate_beer(beer_to_be_reviewed, all_reviews):
 
 
 @app.route("/review/<int:beer_id>/<int:new_mousse>/<int:new_couleur>/<int:new_opacite>/"
-           "<int:new_douceur>/<int:new_amertume>/<int:new_acidite>/<int:new_gushing>/"
+           "<int:new_petillant>/<int:new_douceur>/<int:new_amertume>/<int:new_acidite>/<int:new_gushing>/"
            "<int:new_alcooleux>/<int:new_ethere>/<int:new_fruite>/<int:new_floral>/"
            "<int:new_houblonne>/<int:new_resineux>/<int:new_chocolat>/<int:new_herbeux>/"
            "<int:new_cereales>/<int:new_caramel>/<int:new_brule>/<int:new_score>/"
@@ -613,6 +619,7 @@ def review(beer_id,
            new_mousse,
            new_couleur,
            new_opacite,
+           new_petillant,
            new_douceur,
            new_amertume,
            new_acidite,
@@ -639,6 +646,7 @@ def review(beer_id,
     form.mousse.data = new_mousse
     form.couleur.data = new_couleur
     form.opacite.data = new_opacite
+    form.petillant.data = new_petillant
     form.douceur.data = new_douceur
     form.amertume.data = new_amertume
     form.acidite.data = new_acidite
@@ -665,6 +673,7 @@ def review(beer_id,
             mousse=form.mousse.data,
             couleur=form.couleur.data,
             opacite=form.opacite.data,
+            petillant=form.petillant.data,
             douceur=form.douceur.data,
             amertume=form.amertume.data,
             acidite=form.acidite.data,
@@ -698,6 +707,7 @@ def review(beer_id,
                            new_mousse=new_mousse,
                            new_couleur=new_couleur,
                            new_opacite=new_opacite,
+                           new_petillant=new_petillant,
                            new_douceur=new_douceur,
                            new_amertume=new_amertume,
                            new_acidite=new_acidite,
@@ -723,6 +733,7 @@ def review_edit_fetch(review_id):
     new_mousse = review_to_edit.mousse
     new_couleur = review_to_edit.couleur
     new_opacite = review_to_edit.opacite
+    new_petillant = review_to_edit.petillant
     new_douceur = review_to_edit.douceur
     new_amertume = review_to_edit.amertume
     new_acidite = review_to_edit.acidite
@@ -741,6 +752,7 @@ def review_edit_fetch(review_id):
     new_score = review_to_edit.score
     return redirect(url_for("review_edit", review_id=review_id,
                             new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                            new_petillant=new_petillant,
                             new_douceur=new_douceur, new_amertume=new_amertume, new_acidite=new_acidite,
                             new_gushing=new_gushing, new_alcooleux=new_alcooleux, new_ethere=new_ethere,
                             new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
@@ -750,15 +762,15 @@ def review_edit_fetch(review_id):
 
 
 @app.route("/review-edit/<int:review_id>/<int:new_mousse>/<int:new_couleur>/<int:new_opacite>/"
-           "<int:new_douceur>/<int:new_amertume>/<int:new_acidite>/<int:new_gushing>/"
+           "<int:new_petillant>/<int:new_douceur>/<int:new_amertume>/<int:new_acidite>/<int:new_gushing>/"
            "<int:new_alcooleux>/<int:new_ethere>/<int:new_fruite>/<int:new_floral>/"
            "<int:new_houblonne>/<int:new_resineux>/<int:new_chocolat>/<int:new_herbeux>/"
            "<int:new_cereales>/<int:new_caramel>/<int:new_brule>/<int:new_score>/"
            "<string:scroll>",
            methods=['GET', 'POST'])
 def review_edit(review_id,
-                new_mousse, new_couleur, new_opacite, new_douceur,
-                new_amertume, new_acidite, new_gushing,
+                new_mousse, new_couleur, new_opacite, new_petillant,
+                new_douceur, new_amertume, new_acidite, new_gushing,
                 new_alcooleux, new_ethere, new_fruite,
                 new_floral, new_houblonne, new_resineux,
                 new_chocolat, new_herbeux, new_cereales,
@@ -770,6 +782,7 @@ def review_edit(review_id,
     form.mousse.data = new_mousse
     form.couleur.data = new_couleur
     form.opacite.data = new_opacite
+    form.petillant.data = new_petillant
     form.douceur.data = new_douceur
     form.amertume.data = new_amertume
     form.acidite.data = new_acidite
@@ -791,6 +804,7 @@ def review_edit(review_id,
         review_to_edit.mousse = form.mousse.data
         review_to_edit.couleur = form.couleur.data
         review_to_edit.opacite = form.opacite.data
+        review_to_edit.petillant = form.petillant.data
         review_to_edit.douceur = form.douceur.data
         review_to_edit.amertume = form.amertume.data
         review_to_edit.acidite = form.acidite.data
@@ -819,7 +833,7 @@ def review_edit(review_id,
         return redirect(url_for("beer", beer_id=beer_to_be_reviewed.id))
     return render_template("review-beer-edit.html", form=form, beer=beer_to_be_reviewed,
                            scroll='None', review_id=review_id,
-                           new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                           new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite, new_petillant=new_petillant,
                            new_douceur=new_douceur, new_amertume=new_amertume, new_acidite=new_acidite,
                            new_gushing=new_gushing, new_alcooleux=new_alcooleux, new_ethere=new_ethere,
                            new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
@@ -883,7 +897,7 @@ def order():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5001, debug=False)
+    app.run(host='0.0.0.0', port=5001, debug=True)
 
 # TODO : Ecrire page d'info, formulaire contact
 # TODO : Commander : renvoie vers formulaire contact?
