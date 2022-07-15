@@ -44,7 +44,7 @@ class ReviewForm(FlaskForm):
     acidite = HiddenField("Acidité")
     gushing = HiddenField("Surmoussage")
 
-    alcoolique = HiddenField("Alcoolique")
+    alcooleux = HiddenField("Alcooleux")
     ethere = HiddenField("Éthéré : banane, pomme")
     fruite = HiddenField("Fruité : agrumes, baies, melon, autres fruits")
     floral = HiddenField("Floral : fleurs, roses, parfum, vanille")

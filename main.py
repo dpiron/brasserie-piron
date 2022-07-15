@@ -64,7 +64,7 @@ class Beer(db.Model):
     acidite = db.Column(db.Float)
     gushing = db.Column(db.Float)
 
-    alcoolique = db.Column(db.Float)
+    alcooleux = db.Column(db.Float)
     ethere = db.Column(db.Float)
     fruite = db.Column(db.Float)
     floral = db.Column(db.Float)
@@ -98,7 +98,7 @@ class Review(db.Model):
     acidite = db.Column(db.Integer)
     gushing = db.Column(db.Integer)
 
-    alcoolique = db.Column(db.Integer)
+    alcooleux = db.Column(db.Integer)
     ethere = db.Column(db.Integer)
     fruite = db.Column(db.Integer)
     floral = db.Column(db.Integer)
@@ -551,9 +551,9 @@ def recalculate_beer(beer_to_be_reviewed, all_reviews):
     gushing_avg = get_avg(gushing_list)
     beer_to_be_reviewed.gushing = gushing_avg
 
-    alcoolique_list = [review.alcoolique for review in all_reviews]
-    alcoolique_avg = get_avg(alcoolique_list)
-    beer_to_be_reviewed.alcoolique = alcoolique_avg
+    alcooleux_list = [review.alcooleux for review in all_reviews]
+    alcooleux_avg = get_avg(alcooleux_list)
+    beer_to_be_reviewed.alcooleux = alcooleux_avg
 
     ethere_list = [review.ethere for review in all_reviews]
     ethere_avg = get_avg(ethere_list)
@@ -604,7 +604,7 @@ def recalculate_beer(beer_to_be_reviewed, all_reviews):
 
 @app.route("/review/<int:beer_id>/<int:new_mousse>/<int:new_couleur>/<int:new_opacite>/"
            "<int:new_douceur>/<int:new_amertume>/<int:new_acidite>/<int:new_gushing>/"
-           "<int:new_alcoolique>/<int:new_ethere>/<int:new_fruite>/<int:new_floral>/"
+           "<int:new_alcooleux>/<int:new_ethere>/<int:new_fruite>/<int:new_floral>/"
            "<int:new_houblonne>/<int:new_resineux>/<int:new_chocolat>/<int:new_herbeux>/"
            "<int:new_cereales>/<int:new_caramel>/<int:new_brule>/<int:new_score>/"
            "<string:scroll>",
@@ -617,7 +617,7 @@ def review(beer_id,
            new_amertume,
            new_acidite,
            new_gushing,
-           new_alcoolique,
+           new_alcooleux,
            new_ethere,
            new_fruite,
            new_floral,
@@ -643,7 +643,7 @@ def review(beer_id,
     form.amertume.data = new_amertume
     form.acidite.data = new_acidite
     form.gushing.data = new_gushing
-    form.alcoolique.data = new_alcoolique
+    form.alcooleux.data = new_alcooleux
     form.ethere.data = new_ethere
     form.fruite.data = new_fruite
     form.floral.data = new_floral
@@ -670,7 +670,7 @@ def review(beer_id,
             acidite=form.acidite.data,
             gushing=form.gushing.data,
 
-            alcoolique=form.alcoolique.data,
+            alcooleux=form.alcooleux.data,
             ethere=form.ethere.data,
             fruite=form.fruite.data,
             floral=form.floral.data,
@@ -702,7 +702,7 @@ def review(beer_id,
                            new_amertume=new_amertume,
                            new_acidite=new_acidite,
                            new_gushing=new_gushing,
-                           new_alcoolique=new_alcoolique,
+                           new_alcooleux=new_alcooleux,
                            new_ethere=new_ethere,
                            new_fruite=new_fruite,
                            new_floral=new_floral,
@@ -727,7 +727,7 @@ def review_edit_fetch(review_id):
     new_amertume = review_to_edit.amertume
     new_acidite = review_to_edit.acidite
     new_gushing = review_to_edit.gushing
-    new_alcoolique = review_to_edit.alcoolique
+    new_alcooleux = review_to_edit.alcooleux
     new_ethere = review_to_edit.ethere
     new_fruite = review_to_edit.fruite
     new_floral = review_to_edit.floral
@@ -742,7 +742,7 @@ def review_edit_fetch(review_id):
     return redirect(url_for("review_edit", review_id=review_id,
                             new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
                             new_douceur=new_douceur, new_amertume=new_amertume, new_acidite=new_acidite,
-                            new_gushing=new_gushing, new_alcoolique=new_alcoolique, new_ethere=new_ethere,
+                            new_gushing=new_gushing, new_alcooleux=new_alcooleux, new_ethere=new_ethere,
                             new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
                             new_resineux=new_resineux, new_chocolat=new_chocolat, new_herbeux=new_herbeux,
                             new_cereales=new_cereales, new_caramel=new_caramel, new_brule=new_brule,
@@ -751,7 +751,7 @@ def review_edit_fetch(review_id):
 
 @app.route("/review-edit/<int:review_id>/<int:new_mousse>/<int:new_couleur>/<int:new_opacite>/"
            "<int:new_douceur>/<int:new_amertume>/<int:new_acidite>/<int:new_gushing>/"
-           "<int:new_alcoolique>/<int:new_ethere>/<int:new_fruite>/<int:new_floral>/"
+           "<int:new_alcooleux>/<int:new_ethere>/<int:new_fruite>/<int:new_floral>/"
            "<int:new_houblonne>/<int:new_resineux>/<int:new_chocolat>/<int:new_herbeux>/"
            "<int:new_cereales>/<int:new_caramel>/<int:new_brule>/<int:new_score>/"
            "<string:scroll>",
@@ -759,7 +759,7 @@ def review_edit_fetch(review_id):
 def review_edit(review_id,
                 new_mousse, new_couleur, new_opacite, new_douceur,
                 new_amertume, new_acidite, new_gushing,
-                new_alcoolique, new_ethere, new_fruite,
+                new_alcooleux, new_ethere, new_fruite,
                 new_floral, new_houblonne, new_resineux,
                 new_chocolat, new_herbeux, new_cereales,
                 new_caramel, new_brule, new_score, scroll):
@@ -774,7 +774,7 @@ def review_edit(review_id,
     form.amertume.data = new_amertume
     form.acidite.data = new_acidite
     form.gushing.data = new_gushing
-    form.alcoolique.data = new_alcoolique
+    form.alcooleux.data = new_alcooleux
     form.ethere.data = new_ethere
     form.fruite.data = new_fruite
     form.floral.data = new_floral
@@ -796,7 +796,7 @@ def review_edit(review_id,
         review_to_edit.acidite = form.acidite.data
         review_to_edit.gushing = form.gushing.data
 
-        review_to_edit.alcoolique = form.alcoolique.data
+        review_to_edit.alcooleux = form.alcooleux.data
         review_to_edit.ethere = form.ethere.data
         review_to_edit.fruite = form.fruite.data
         review_to_edit.floral = form.floral.data
@@ -821,7 +821,7 @@ def review_edit(review_id,
                            scroll='None', review_id=review_id,
                            new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
                            new_douceur=new_douceur, new_amertume=new_amertume, new_acidite=new_acidite,
-                           new_gushing=new_gushing, new_alcoolique=new_alcoolique, new_ethere=new_ethere,
+                           new_gushing=new_gushing, new_alcooleux=new_alcooleux, new_ethere=new_ethere,
                            new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
                            new_resineux=new_resineux, new_chocolat=new_chocolat, new_herbeux=new_herbeux,
                            new_cereales=new_cereales, new_caramel=new_caramel,
