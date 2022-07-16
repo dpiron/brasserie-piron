@@ -752,8 +752,8 @@ def review_edit_fetch(review_id):
     new_score = review_to_edit.score
     return redirect(url_for("review_edit", review_id=review_id,
                             new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
-                            new_petillant=new_petillant,
-                            new_douceur=new_douceur, new_amertume=new_amertume, new_acidite=new_acidite,
+                            new_petillant=new_petillant, new_douceur=new_douceur, new_amertume=new_amertume,
+                            new_acidite=new_acidite,
                             new_gushing=new_gushing, new_alcooleux=new_alcooleux, new_ethere=new_ethere,
                             new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
                             new_resineux=new_resineux, new_chocolat=new_chocolat, new_herbeux=new_herbeux,
