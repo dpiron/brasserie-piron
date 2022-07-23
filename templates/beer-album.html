@@ -28,90 +28,94 @@
           <!--
             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect>
                 <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    {{ beer.name }}
+                    {{ beer[0].name }}
                 </text>
             </svg>
           -->
 
             <div class="card-body">
-              <h5 class="card-title">{{ beer.name }}</h5>
+              <h5 class="card-title">{{ beer[0].name }}</h5>
               <p class="card-text">
-                  {{ beer.type }}
+                  {{ beer[0].type }}
               </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('beer', beer_id=beer.id) }}">Voir</a>
+                    {% if beer[1] == False %}
+                    <a class="btn btn-sm btn-outline-primary" href="{{ url_for('beer', beer_id=beer[0].id) }}">Voir</a>
+                    {% else %}
+                    <a class="btn btn-sm btn-outline-success" href="{{ url_for('beer', beer_id=beer[0].id) }}">Voir</a>
+                    {% endif %}
                 </div>
                 <div class="p-0">
-                  {% if beer.score != 0 %}
-                        {% if beer.score == 0 %}
+                  {% if beer[0].score != 0 %}
+                        {% if beer[0].score == 0 %}
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
-                        {% elif beer.score <= 1 %}
+                        {% elif beer[0].score <= 1 %}
                             <i class="fa-regular fa-star-half-stroke"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
-                        {% elif beer.score <= 2 %}
+                        {% elif beer[0].score <= 2 %}
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
-                        {% elif beer.score <= 3 %}
+                        {% elif beer[0].score <= 3 %}
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-regular fa-star-half-stroke"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
-                        {% elif beer.score <= 4 %}
+                        {% elif beer[0].score <= 4 %}
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
-                        {% elif beer.score <= 5 %}
+                        {% elif beer[0].score <= 5 %}
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-regular fa-star-half-stroke"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
-                        {% elif beer.score <= 6 %}
+                        {% elif beer[0].score <= 6 %}
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
-                        {% elif beer.score <= 7 %}
+                        {% elif beer[0].score <= 7 %}
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-regular fa-star-half-stroke"></i>
                             <i class="fa-regular fa-star"></i>
-                        {% elif beer.score <= 8 %}
+                        {% elif beer[0].score <= 8 %}
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-regular fa-star"></i>
-                        {% elif beer.score <= 9 %}
+                        {% elif beer[0].score <= 9 %}
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-regular fa-star-half-stroke"></i>
-                        {% elif beer.score <= 10 %}
+                        {% elif beer[0].score <= 10 %}
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                         {% endif %}
-                        <small class="text-muted p-1">{{ beer.score }} / 10</small>
+                        <small class="text-muted p-1">{{ beer[0].score }} / 10</small>
                     {% endif %}
                 </div>
               </div>

@@ -55,6 +55,7 @@ class Beer(db.Model):
     type = db.Column(db.String(100))
     version = db.Column(db.Integer)
     description = db.Column(db.String(1000))
+    date = db.Column(db.DateTime)
 
     mousse = db.Column(db.Float)
     couleur = db.Column(db.Float)
@@ -337,6 +338,7 @@ def beers():
     desc_expression = desc(Beer.score)
     order_by_query = beers_query.order_by(desc_expression)
     beer_name_list = [beer.name for beer in order_by_query]
+
     for name in beer_name_list:
         versioned_beers = Beer.query.filter_by(name=name)
         versions_list = [beer.version for beer in versioned_beers]
@@ -344,7 +346,19 @@ def beers():
         final_beer = [beer for beer in versioned_beers if beer.version == max_version][0]
         home_beer_list.append(final_beer)
 
-    return render_template("beer-album.html", beers=home_beer_list)
+    is_reviewed_list = []
+    for beer in home_beer_list:
+        review_list = [item for item in beer.reviews]
+        if current_user.is_authenticated:
+            users_list = [review.review_author for review in review_list]
+            is_reviewed = current_user in users_list
+        else:
+            is_reviewed = False
+        is_reviewed_list.append(is_reviewed)
+
+    beer_list = [(home_beer_list[i], is_reviewed_list[i]) for i in range(len(home_beer_list))]
+
+    return render_template("beer-album.html", beers=beer_list)
 
 
 @app.route('/beer/<int:beer_id>')
@@ -393,6 +407,7 @@ def admin_add_beer():
             name=form.name.data,
             type=form.type.data,
             version=1, # form.version.data,
+            date=form.date.data,
             description=form.description.data,
             score=0
         )
@@ -417,12 +432,14 @@ def admin_edit_beer(beer_id):
         name=beer_to_edit.name,
         type=beer_to_edit.type,
         # version=beer_to_edit.version,
+        date=beer_to_edit.date,
         description=beer_to_edit.description
     )
     if edit_form.validate_on_submit():
         beer_to_edit.name = edit_form.name.data
         beer_to_edit.type = edit_form.type.data
-        beer_to_edit.version = 1,  # edit_form.version.data
+        beer_to_edit.version = 1  # edit_form.version.data
+        beer_to_edit.date = edit_form.date.data
         beer_to_edit.description = edit_form.description.data
         db.session.commit()
         return redirect(url_for("admin_edit_beer_page"))

@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, IntegerField, BooleanField, FloatField, DecimalField, HiddenField
+from wtforms import StringField, SubmitField, PasswordField, IntegerField, BooleanField, FloatField, DecimalField, \
+    HiddenField, DateTimeField
 from wtforms.validators import DataRequired, URL, optional, NumberRange, Email
 from flask_ckeditor import CKEditorField
 
@@ -29,6 +30,7 @@ class ChangePasswordForm(FlaskForm):
 
 class AddBeerForm(FlaskForm):
     name = StringField("Nom", validators=[DataRequired()])
+    date = DateTimeField("Date (mm/yy) (Exemple : 06/22)", format='%m/%y', validators=[DataRequired()])
     # version = IntegerField("Version", validators=[DataRequired()])
     type = StringField("Type", validators=[DataRequired()])
     description = CKEditorField("Description")

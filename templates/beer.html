@@ -110,10 +110,10 @@
                 </h4>
                 <div>
                     {% if is_reviewed %}
-                        <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('review_edit_fetch',
+                        <a class="btn btn-sm btn-outline-success" href="{{ url_for('review_edit_fetch',
                         beer_id=beer.id, review_id=review_id) }}">Modifier fiche de dégustation</a>
                     {% else %}
-                        <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('review', beer_id=beer.id, scroll='None',
+                        <a class="btn btn-sm btn-outline-primary" href="{{ url_for('review', beer_id=beer.id, scroll='None',
                         new_mousse=0, new_couleur=0, new_opacite=0, new_petillant=0, new_douceur=0, new_amertume=0, new_acidite=0,
                         new_gushing=0, new_alcooleux=0, new_ethere=0, new_fruite=0, new_floral=0, new_houblonne=0,
                         new_resineux=0, new_chocolat=0, new_herbeux=0, new_cereales=0, new_caramel=0, new_brule=0, new_score=0) }}">Déguster</a>

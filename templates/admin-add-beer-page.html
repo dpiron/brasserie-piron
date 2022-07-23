@@ -18,6 +18,7 @@
                         <th>Bière</th>
                         <!-- <th>Version</th> -->
                         <th>Type</th>
+                        <th>Date</th>
                         <th>Score</th>
                         <th>Ajouter</th>
                         <th>
@@ -33,6 +34,7 @@
                         <td class="align-middle">{{ beer.name }}</td>
                         <!-- <td class="align-middle">{{ beer.version }}</td> -->
                         <td class="align-middle">{{ beer.type }}</td>
+                        <td class="align-middle">{{ beer.date.strftime('%m/%y') }}</td>
                         <td class="align-middle">{{ beer.score }}</td>
                         <td class="align-middle"></td>
                     </tr>

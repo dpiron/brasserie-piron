@@ -19,6 +19,7 @@
                         <th>Bière</th>
                         <!-- <th>Version</th> -->
                         <th>Type</th>
+                        <th>Date</th>
                         <th>Score</th>
                         <th>Modifier</th>
                     </tr>
@@ -29,6 +30,7 @@
                         <td class="align-middle">{{ beer.name }}</td>
                         <!-- <td class="align-middle">{{ beer.version }}</td> -->
                         <td class="align-middle">{{ beer.type }}</td>
+                        <td class="align-middle">{{ beer.date.strftime('%m/%y') }}</td>
                         <td class="align-middle">{{ beer.score }}</td>
                         <td class="align-middle">
                             <a href="{{ url_for('admin_edit_beer', beer_id=beer.id) }}" class="btn btn-primary btn-circle">
