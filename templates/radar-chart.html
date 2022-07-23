@@ -36,16 +36,14 @@ var myLineChart = new Chart(ctx, {
   data: {
     labels: [
     "Alcooleux",
-    "Etheré",
     "Fruité",
     "Floral",
     "Houblonné",
-    "Résineux",
-    "Chocolat",
+    "Boisé",
+    "Torréfié",
     "Herbeux",
     "Céréales",
-    "Caramel",
-    "Brulé"
+    "Epicé"
     ],
     datasets: [{
       label: "",
@@ -62,16 +60,14 @@ var myLineChart = new Chart(ctx, {
       pointBorderWidth: 2,
       data: [
         {{ beer.alcooleux }},
-        {{ beer.ethere }},
         {{ beer.fruite }},
         {{ beer.floral }},
         {{ beer.houblonne }},
-        {{ beer.resineux }},
-        {{ beer.chocolat }},
+        {{ beer.boise }},
+        {{ beer.torrefie }},
         {{ beer.herbeux }},
         {{ beer.cereales }},
-        {{ beer.caramel }},
-        {{ beer.brule }}
+        {{ beer.epice }}
       ],
     }],
   },

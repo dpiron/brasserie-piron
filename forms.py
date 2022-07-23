@@ -48,16 +48,14 @@ class ReviewForm(FlaskForm):
     gushing = HiddenField("Surmoussage")
 
     alcooleux = HiddenField("Alcooleux")
-    ethere = HiddenField("Éthéré : banane, pomme")
     fruite = HiddenField("Fruité : agrumes, baies, melon, autres fruits")
     floral = HiddenField("Floral : fleurs, roses, parfum, vanille")
     houblonne = HiddenField("Houblonné")
-    resineux = HiddenField("Résineux : sciure, résine, pin, épicéa, bois sec")
-    chocolat = HiddenField()
+    boise = HiddenField("Boisé : sciure, résine, pin, épicéa, bois sec")
+    torrefie = HiddenField("Torréfié : ")
     herbeux = HiddenField("Herbeux : herbe fraichement coupée, paille")
     cereales = HiddenField("Céréales : céréales crues, balle du grain, gruau, farine")
-    caramel = HiddenField("Caramel")
-    brule = HiddenField("Brulé")
+    epice = HiddenField("Epicé")
 
     score = HiddenField("Note globale")
 

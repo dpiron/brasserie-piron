@@ -28,15 +28,14 @@
                         <th><div class="rotate">Acidité</div></th>
                         <th><div class="rotate">Gushing</div></th>
                         <th><div class="rotate">Alcooleux</div></th>
-                        <th><div class="rotate">Ethéré</div></th>
                         <th><div class="rotate">Fruité</div></th>
                         <th><div class="rotate">Floral</div></th>
                         <th><div class="rotate">Houblonné</div></th>
-                        <th><div class="rotate">Résineux</div></th>
-                        <th><div class="rotate">Chocolat</div></th>
+                        <th><div class="rotate">Boisé</div></th>
+                        <th><div class="rotate">Torréfié</div></th>
                         <th><div class="rotate">Herbeux</div></th>
-                        <th><div class="rotate">Caramel</div></th>
-                        <th><div class="rotate">Brulé</div></th>
+                        <th><div class="rotate">Céréales</div></th>
+                        <th><div class="rotate">Epicé</div></th>
                         <th><div class="rotate">Note</div></th>
                         <th><div class="rotate">Modifier</div></th>
                     </tr>
@@ -56,15 +55,14 @@
                         <td class="align-middle">{{ review.acidite }}</td>
                         <td class="align-middle">{{ review.gushing }}</td>
                         <td class="align-middle">{{ review.alcooleux }}</td>
-                        <td class="align-middle">{{ review.ethere }}</td>
                         <td class="align-middle">{{ review.fruite }}</td>
                         <td class="align-middle">{{ review.floral }}</td>
                         <td class="align-middle">{{ review.houblonne }}</td>
-                        <td class="align-middle">{{ review.resineux }}</td>
-                        <td class="align-middle">{{ review.chocolat }}</td>
+                        <td class="align-middle">{{ review.boise }}</td>
+                        <td class="align-middle">{{ review.torrefie }}</td>
                         <td class="align-middle">{{ review.herbeux }}</td>
                         <td class="align-middle">{{ review.cereales }}</td>
-                        <td class="align-middle">{{ review.caramel }}</td>
+                        <td class="align-middle">{{ review.epice }}</td>
                         <td class="align-middle">{{ review.score }}</td>
                         <td class="align-middle">
                             <a href="{{ url_for('admin_delete_review', review_id=review.id) }}" class="btn btn-danger btn-circle">

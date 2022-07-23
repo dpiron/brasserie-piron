@@ -67,16 +67,14 @@ class Beer(db.Model):
     gushing = db.Column(db.Float)
 
     alcooleux = db.Column(db.Float)
-    ethere = db.Column(db.Float)
     fruite = db.Column(db.Float)
     floral = db.Column(db.Float)
     houblonne = db.Column(db.Float)
-    resineux = db.Column(db.Float)
-    chocolat = db.Column(db.Float)
+    boise = db.Column(db.Float)
+    torrefie = db.Column(db.Float)
     herbeux = db.Column(db.Float)
     cereales = db.Column(db.Float)
-    caramel = db.Column(db.Float)
-    brule = db.Column(db.Float)
+    epice = db.Column(db.Float)
 
     score = db.Column(db.Float)
 
@@ -102,16 +100,14 @@ class Review(db.Model):
     gushing = db.Column(db.Integer)
 
     alcooleux = db.Column(db.Integer)
-    ethere = db.Column(db.Integer)
     fruite = db.Column(db.Integer)
     floral = db.Column(db.Integer)
     houblonne = db.Column(db.Integer)
-    resineux = db.Column(db.Integer)
-    chocolat = db.Column(db.Integer)
+    boise = db.Column(db.Integer)
+    torrefie = db.Column(db.Integer)
     herbeux = db.Column(db.Integer)
     cereales = db.Column(db.Integer)
-    caramel = db.Column(db.Integer)
-    brule = db.Column(db.Integer)
+    epice = db.Column(db.Integer)
 
     score = db.Column(db.Integer)
 
@@ -578,10 +574,6 @@ def recalculate_beer(beer_to_be_reviewed, all_reviews):
     alcooleux_avg = get_avg(alcooleux_list)
     beer_to_be_reviewed.alcooleux = alcooleux_avg
 
-    ethere_list = [review.ethere for review in all_reviews]
-    ethere_avg = get_avg(ethere_list)
-    beer_to_be_reviewed.ethere = ethere_avg
-
     fruite_list = [review.fruite for review in all_reviews]
     fruite_avg = get_avg(fruite_list)
     beer_to_be_reviewed.fruite = fruite_avg
@@ -594,13 +586,13 @@ def recalculate_beer(beer_to_be_reviewed, all_reviews):
     houblonne_avg = get_avg(houblonne_list)
     beer_to_be_reviewed.houblonne = houblonne_avg
 
-    resineux_list = [review.resineux for review in all_reviews]
-    resineux_avg = get_avg(resineux_list)
-    beer_to_be_reviewed.resineux = resineux_avg
+    boise_list = [review.boise for review in all_reviews]
+    boise_avg = get_avg(boise_list)
+    beer_to_be_reviewed.boise = boise_avg
 
-    chocolat_list = [review.chocolat for review in all_reviews]
-    chocolat_avg = get_avg(chocolat_list)
-    beer_to_be_reviewed.chocolat = chocolat_avg
+    torrefie_list = [review.torrefie for review in all_reviews]
+    torrefie_avg = get_avg(torrefie_list)
+    beer_to_be_reviewed.torrefie = torrefie_avg
 
     herbeux_list = [review.herbeux for review in all_reviews]
     herbeux_avg = get_avg(herbeux_list)
@@ -610,13 +602,9 @@ def recalculate_beer(beer_to_be_reviewed, all_reviews):
     cereales_avg = get_avg(cereales_list)
     beer_to_be_reviewed.cereales = cereales_avg
 
-    caramel_list = [review.caramel for review in all_reviews]
-    caramel_avg = get_avg(caramel_list)
-    beer_to_be_reviewed.caramel = caramel_avg
-
-    brule_list = [review.brule for review in all_reviews]
-    brule_avg = get_avg(brule_list)
-    beer_to_be_reviewed.brule = brule_avg
+    epice_list = [review.epice for review in all_reviews]
+    epice_avg = get_avg(epice_list)
+    beer_to_be_reviewed.epice = epice_avg
 
     score_list = [review.score for review in all_reviews]
     score_avg = get_avg(score_list)
@@ -627,9 +615,9 @@ def recalculate_beer(beer_to_be_reviewed, all_reviews):
 
 @app.route("/review/<int:beer_id>/<int:new_mousse>/<int:new_couleur>/<int:new_opacite>/"
            "<int:new_petillant>/<int:new_douceur>/<int:new_amertume>/<int:new_acidite>/<int:new_gushing>/"
-           "<int:new_alcooleux>/<int:new_ethere>/<int:new_fruite>/<int:new_floral>/"
-           "<int:new_houblonne>/<int:new_resineux>/<int:new_chocolat>/<int:new_herbeux>/"
-           "<int:new_cereales>/<int:new_caramel>/<int:new_brule>/<int:new_score>/"
+           "<int:new_alcooleux>/<int:new_fruite>/<int:new_floral>/"
+           "<int:new_houblonne>/<int:new_boise>/<int:new_torrefie>/<int:new_herbeux>/"
+           "<int:new_cereales>/<int:new_epice>/<int:new_score>/"
            "<string:scroll>",
            methods=['GET', 'POST'])
 def review(beer_id,
@@ -642,16 +630,14 @@ def review(beer_id,
            new_acidite,
            new_gushing,
            new_alcooleux,
-           new_ethere,
            new_fruite,
            new_floral,
            new_houblonne,
-           new_resineux,
-           new_chocolat,
+           new_boise,
+           new_torrefie,
            new_herbeux,
            new_cereales,
-           new_caramel,
-           new_brule,
+           new_epice,
            new_score,
            scroll):
     if not current_user.is_authenticated:
@@ -669,16 +655,14 @@ def review(beer_id,
     form.acidite.data = new_acidite
     form.gushing.data = new_gushing
     form.alcooleux.data = new_alcooleux
-    form.ethere.data = new_ethere
     form.fruite.data = new_fruite
     form.floral.data = new_floral
     form.houblonne.data = new_houblonne
-    form.resineux.data = new_resineux
-    form.chocolat.data = new_chocolat
+    form.boise.data = new_boise
+    form.torrefie.data = new_torrefie
     form.herbeux.data = new_herbeux
     form.cereales.data = new_cereales
-    form.caramel.data = new_caramel
-    form.brule.data = new_brule
+    form.epice.data = new_epice
     form.score.data = new_score
 
     if form.validate_on_submit():
@@ -697,16 +681,14 @@ def review(beer_id,
             gushing=form.gushing.data,
 
             alcooleux=form.alcooleux.data,
-            ethere=form.ethere.data,
             fruite=form.fruite.data,
             floral=form.floral.data,
             houblonne=form.houblonne.data,
-            resineux=form.resineux.data,
-            chocolat=form.chocolat.data,
+            boise=form.boise.data,
+            torrefie=form.torrefie.data,
             herbeux=form.herbeux.data,
             cereales=form.cereales.data,
-            caramel=form.caramel.data,
-            brule=form.brule.data,
+            epice=form.epice.data,
 
             score=form.score.data
         )
@@ -730,16 +712,14 @@ def review(beer_id,
                            new_acidite=new_acidite,
                            new_gushing=new_gushing,
                            new_alcooleux=new_alcooleux,
-                           new_ethere=new_ethere,
                            new_fruite=new_fruite,
                            new_floral=new_floral,
                            new_houblonne=new_houblonne,
-                           new_resineux=new_resineux,
-                           new_chocolat=new_chocolat,
+                           new_boise=new_boise,
+                           new_torrefie=new_torrefie,
                            new_herbeux=new_herbeux,
                            new_cereales=new_cereales,
-                           new_caramel=new_caramel,
-                           new_brule=new_brule,
+                           new_epice=new_epice,
                            new_score=new_score)
 
 
@@ -756,42 +736,40 @@ def review_edit_fetch(review_id):
     new_acidite = review_to_edit.acidite
     new_gushing = review_to_edit.gushing
     new_alcooleux = review_to_edit.alcooleux
-    new_ethere = review_to_edit.ethere
     new_fruite = review_to_edit.fruite
     new_floral = review_to_edit.floral
     new_houblonne = review_to_edit.houblonne
-    new_resineux = review_to_edit.resineux
-    new_chocolat = review_to_edit.chocolat
+    new_boise = review_to_edit.boise
+    new_torrefie = review_to_edit.torrefie
     new_herbeux = review_to_edit.herbeux
     new_cereales = review_to_edit.cereales
-    new_caramel = review_to_edit.caramel
-    new_brule = review_to_edit.brule
+    new_epice = review_to_edit.epice
     new_score = review_to_edit.score
     return redirect(url_for("review_edit", review_id=review_id,
                             new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
                             new_petillant=new_petillant, new_douceur=new_douceur, new_amertume=new_amertume,
                             new_acidite=new_acidite,
-                            new_gushing=new_gushing, new_alcooleux=new_alcooleux, new_ethere=new_ethere,
+                            new_gushing=new_gushing, new_alcooleux=new_alcooleux,
                             new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
-                            new_resineux=new_resineux, new_chocolat=new_chocolat, new_herbeux=new_herbeux,
-                            new_cereales=new_cereales, new_caramel=new_caramel, new_brule=new_brule,
+                            new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                            new_cereales=new_cereales, new_epice=new_epice,
                             new_score=new_score, scroll='None'))
 
 
 @app.route("/review-edit/<int:review_id>/<int:new_mousse>/<int:new_couleur>/<int:new_opacite>/"
            "<int:new_petillant>/<int:new_douceur>/<int:new_amertume>/<int:new_acidite>/<int:new_gushing>/"
-           "<int:new_alcooleux>/<int:new_ethere>/<int:new_fruite>/<int:new_floral>/"
-           "<int:new_houblonne>/<int:new_resineux>/<int:new_chocolat>/<int:new_herbeux>/"
-           "<int:new_cereales>/<int:new_caramel>/<int:new_brule>/<int:new_score>/"
+           "<int:new_alcooleux>/<int:new_fruite>/<int:new_floral>/"
+           "<int:new_houblonne>/<int:new_boise>/<int:new_torrefie>/<int:new_herbeux>/"
+           "<int:new_cereales>/<int:new_epice>/<int:new_score>/"
            "<string:scroll>",
            methods=['GET', 'POST'])
 def review_edit(review_id,
                 new_mousse, new_couleur, new_opacite, new_petillant,
                 new_douceur, new_amertume, new_acidite, new_gushing,
-                new_alcooleux, new_ethere, new_fruite,
-                new_floral, new_houblonne, new_resineux,
-                new_chocolat, new_herbeux, new_cereales,
-                new_caramel, new_brule, new_score, scroll):
+                new_alcooleux, new_fruite,
+                new_floral, new_houblonne, new_boise,
+                new_torrefie, new_herbeux, new_cereales,
+                new_epice, new_score, scroll):
     review_to_edit = Review.query.get(review_id)
     beer_to_be_reviewed = review_to_edit.reviews_beer
 
@@ -805,16 +783,14 @@ def review_edit(review_id,
     form.acidite.data = new_acidite
     form.gushing.data = new_gushing
     form.alcooleux.data = new_alcooleux
-    form.ethere.data = new_ethere
     form.fruite.data = new_fruite
     form.floral.data = new_floral
     form.houblonne.data = new_houblonne
-    form.resineux.data = new_resineux
-    form.chocolat.data = new_chocolat
+    form.boise.data = new_boise
+    form.torrefie.data = new_torrefie
     form.herbeux.data = new_herbeux
     form.cereales.data = new_cereales
-    form.caramel.data = new_caramel
-    form.brule.data = new_brule
+    form.epice.data = new_epice
     form.score.data = new_score
 
     if form.validate_on_submit():
@@ -828,16 +804,14 @@ def review_edit(review_id,
         review_to_edit.gushing = form.gushing.data
 
         review_to_edit.alcooleux = form.alcooleux.data
-        review_to_edit.ethere = form.ethere.data
         review_to_edit.fruite = form.fruite.data
         review_to_edit.floral = form.floral.data
         review_to_edit.houblonne = form.houblonne.data
-        review_to_edit.resineux = form.resineux.data
-        review_to_edit.chocolat = form.chocolat.data
+        review_to_edit.boise = form.boise.data
+        review_to_edit.torrefie = form.torrefie.data
         review_to_edit.herbeux = form.herbeux.data
         review_to_edit.cereales = form.cereales.data
-        review_to_edit.caramel = form.caramel.data
-        review_to_edit.brule = form.brule.data
+        review_to_edit.epice = form.epice.data
 
         review_to_edit.score = form.score.data
 
@@ -852,11 +826,11 @@ def review_edit(review_id,
                            scroll='None', review_id=review_id,
                            new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite, new_petillant=new_petillant,
                            new_douceur=new_douceur, new_amertume=new_amertume, new_acidite=new_acidite,
-                           new_gushing=new_gushing, new_alcooleux=new_alcooleux, new_ethere=new_ethere,
+                           new_gushing=new_gushing, new_alcooleux=new_alcooleux,
                            new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
-                           new_resineux=new_resineux, new_chocolat=new_chocolat, new_herbeux=new_herbeux,
-                           new_cereales=new_cereales, new_caramel=new_caramel,
-                           new_brule=new_brule, new_score=new_score)
+                           new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                           new_cereales=new_cereales, new_epice=new_epice,
+                           new_score=new_score)
 
 
 @app.route("/add-comment/<int:beer_id>", methods=['GET', 'POST'])
