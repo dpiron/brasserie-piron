@@ -58,10 +58,251 @@
 
                                     <div class="col-12 align-self-center p-0 btn-group btn-group-sm" role="group">
 
-                                        boise
+                                        {% if form.gushing.data==0 %}
+                                            <a role="button" class="btn btn-outline-secondary active" aria-pressed="true"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=0, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">0</a>
+                                            {% else %}
+                                            <a role="button" class="btn btn-outline-secondary" aria-pressed="false"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=0, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">0</a>
+                                            {% endif %}
+
+                                            {% if form.gushing.data==1 %}
+                                            <a role="button" class="btn btn-outline-secondary active" aria-pressed="true"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=1, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">1</a>
+                                            {% else %}
+                                            <a role="button" class="btn btn-outline-secondary" aria-pressed="false"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=1, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">1</a>
+                                            {% endif %}
+
+                                            {% if form.gushing.data==2 %}
+                                            <a role="button" class="btn btn-outline-secondary active" aria-pressed="true"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=2, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">2</a>
+                                            {% else %}
+                                            <a role="button" class="btn btn-outline-secondary" aria-pressed="false"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=2, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">2</a>
+                                            {% endif %}
+
+                                            {% if form.gushing.data==3 %}
+                                            <a role="button" class="btn btn-outline-secondary active" aria-pressed="true"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=3, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">3</a>
+                                            {% else %}
+                                            <a role="button" class="btn btn-outline-secondary" aria-pressed="false"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=3, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">3</a>
+                                            {% endif %}
+
+                                            {% if form.gushing.data==4 %}
+                                            <a role="button" class="btn btn-outline-secondary active" aria-pressed="true"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=4, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">4</a>
+                                            {% else %}
+                                            <a role="button" class="btn btn-outline-secondary" aria-pressed="false"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=4, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">4</a>
+                                            {% endif %}
+
+                                            {% if form.gushing.data==5 %}
+                                            <a role="button" class="btn btn-outline-secondary active" aria-pressed="true"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=5, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">5</a>
+                                            {% else %}
+                                            <a role="button" class="btn btn-outline-secondary" aria-pressed="false"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=5, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">5</a>
+                                            {% endif %}
+
+                                            {% if form.gushing.data==6 %}
+                                            <a role="button" class="btn btn-outline-secondary active" aria-pressed="true"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=6, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">6</a>
+                                            {% else %}
+                                            <a role="button" class="btn btn-outline-secondary" aria-pressed="false"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=6, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">6</a>
+                                            {% endif %}
+
+                                            {% if form.gushing.data==7 %}
+                                            <a role="button" class="btn btn-outline-secondary active" aria-pressed="true"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=7, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">7</a>
+                                            {% else %}
+                                            <a role="button" class="btn btn-outline-secondary" aria-pressed="false"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=7, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">7</a>
+                                            {% endif %}
+
+                                            {% if form.gushing.data==8 %}
+                                            <a role="button" class="btn btn-outline-secondary active" aria-pressed="true"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=8, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">8</a>
+                                            {% else %}
+                                            <a role="button" class="btn btn-outline-secondary" aria-pressed="false"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=8, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">8</a>
+                                            {% endif %}
+
+                                            {% if form.gushing.data==9 %}
+                                            <a role="button" class="btn btn-outline-secondary active" aria-pressed="true"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=9, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">9</a>
+                                            {% else %}
+                                            <a role="button" class="btn btn-outline-secondary" aria-pressed="false"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=9, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">9</a>
+                                            {% endif %}
+
+                                            {% if form.opacite.data==10 %}
+                                            <a role="button" class="btn btn-outline-secondary active" aria-pressed="true"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=10, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">10</a>
+                                            {% else %}
+                                            <a role="button" class="btn btn-outline-secondary" aria-pressed="false"
+                                               href="{{ url_for('review', beer_id=beer.id, scroll='robe',
+                                               new_mousse=new_mousse, new_couleur=new_couleur, new_opacite=new_opacite,
+                                               new_douceur=new_douceur, new_petillant=new_petillant, new_amertume=new_amertume, new_acidite=new_acidite,
+                                               new_gushing=10, new_alcooleux=new_alcooleux,
+                                               new_fruite=new_fruite, new_floral=new_floral, new_houblonne=new_houblonne,
+                                               new_boise=new_boise, new_torrefie=new_torrefie, new_herbeux=new_herbeux,
+                                               new_cereales=new_cereales, new_epice=new_epice,
+                                               new_score=new_score) }}">10</a>
+                                            {% endif %}
 
                                     </div>
                                 </div>
+
                                 <div class="row mx-auto justify-content-center">
                                     <div class="col-12 p-0 py-1 text-center">
 
