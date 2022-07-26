@@ -1,3 +1,4 @@
+import datetime
 import os
 from functools import wraps
 
@@ -217,7 +218,7 @@ def login():
             flash("Le mot de passe est incorrect!")
             return redirect(url_for('login'))
         else:
-            login_user(user)
+            login_user(user, remember=True, duration=datetime.timedelta(days=100))
             return redirect(url_for('home'))
 
     return render_template("login.html", form=form)
