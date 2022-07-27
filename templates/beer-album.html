@@ -8,9 +8,37 @@
     <div>
       <div class="bg-light py-5 px-2 rounded">
         <div class="col-sm-8 mx-auto">
-          <h1 class="mb-3">Les bières</h1>
-          <p>Voici nos bières. À vos marques. Prêts? Dégustez!
-          </p>
+            <div class="d-flex align-items-end mb-3">
+                <h1 class="flex-grow-1 mb-0">Les bières</h1>
+                <div class="dropdown">
+                    <a class="btn btn-light btn-sm dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Trier par <em class="text-primary">{{ sort }}</em>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='note') }}">Note</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='date') }}">Date</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='mousse') }}">Mousse</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='couleur') }}">Couleur</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='opacité') }}">Opacité</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='pétillant') }}">Pétillant</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='douceur') }}">Douceur</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='amertume') }}">Amertume</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='acidité') }}">Acidité</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='gushing') }}">Gushing</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='alcooleux') }}">Alcooleux</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='fruité') }}">Fruité</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='floral') }}">Floral</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='houblonné') }}">Houblonné</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='boisé') }}">Boisé</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='torréfié') }}">Torréfié</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='herbeux') }}">Herbeux</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='céréales') }}">Céréales</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('beers', sort='épicé') }}">Epicé</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p>Voici nos bières. À vos marques. Prêts? Dégustez!</p>
         </div>
       </div>
     </div>
@@ -34,91 +62,271 @@
           -->
 
             <div class="card-body">
-              <h5 class="card-title">{{ beer[0].name }}</h5>
-              <p class="card-text">
+                <div class="card-title d-flex align-items-end">
+                    <h5 class="flex-grow-1 mb-0">{{ beer[0].name }}</h5>
+                    <p class="mb-0">{{ beer[0].date.strftime('%b %Y') }}</p>
+                </div>
+                <p class="card-text">
                   {{ beer[0].type }}
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                    {% if beer[1] == False %}
-                    <a class="btn btn-sm btn-outline-danger" href="{{ url_for('beer', beer_id=beer[0].id) }}">Voir</a>
-                    {% else %}
-                    <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('beer', beer_id=beer[0].id) }}">Voir</a>
-                    {% endif %}
-                </div>
-                <div class="p-0">
-                  {% if beer[0].score != 0 %}
-                        {% if beer[0].score == 0 %}
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                        {% elif beer[0].score <= 1 %}
-                            <i class="fa-regular fa-star-half-stroke"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                        {% elif beer[0].score <= 2 %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                        {% elif beer[0].score <= 3 %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-regular fa-star-half-stroke"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                        {% elif beer[0].score <= 4 %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                        {% elif beer[0].score <= 5 %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-regular fa-star-half-stroke"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                        {% elif beer[0].score <= 6 %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                        {% elif beer[0].score <= 7 %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-regular fa-star-half-stroke"></i>
-                            <i class="fa-regular fa-star"></i>
-                        {% elif beer[0].score <= 8 %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                        {% elif beer[0].score <= 9 %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-regular fa-star-half-stroke"></i>
-                        {% elif beer[0].score <= 10 %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
+                </p>
+                <div class="row align-items-center">
+                    <div class="col-3">
+                      <div class="btn-group">
+                        {% if beer[1] == False %}
+                        <a class="btn btn-sm btn-outline-danger" href="{{ url_for('beer', beer_id=beer[0].id) }}">Voir</a>
+                        {% else %}
+                        <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('beer', beer_id=beer[0].id) }}">Voir</a>
                         {% endif %}
-                        <small class="text-muted p-1">{{ beer[0].score }} / 10</small>
+                      </div>
+                    </div>
+                    {% if sort == 'note' or sort == 'date' %}
+                    <div class="col-9">
+                        <div class="p-0 d-flex justify-content-end align-items-center">
+                          {% if beer[0].score != 0 %}
+                                {% if beer[0].score == 0 %}
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                {% elif beer[0].score <= 1 %}
+                                    <i class="fa-regular fa-star-half-stroke pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                {% elif beer[0].score <= 2 %}
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                {% elif beer[0].score <= 3 %}
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star-half-stroke pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                {% elif beer[0].score <= 4 %}
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                {% elif beer[0].score <= 5 %}
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star-half-stroke pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                {% elif beer[0].score <= 6 %}
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                {% elif beer[0].score <= 7 %}
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star-half-stroke pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                {% elif beer[0].score <= 8 %}
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star pe-1"></i>
+                                {% elif beer[0].score <= 9 %}
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-regular fa-star-half-stroke pe-1"></i>
+                                {% elif beer[0].score <= 10 %}
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                    <i class="fa-solid fa-star pe-1"></i>
+                                {% endif %}
+                                <small class="text-muted p-1">{{ beer[0].score }} / 10</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% elif sort == 'mousse' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>mousse</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].mousse*10 }}%"
+                             aria-valuenow="{{ beer[0].mousse*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'couleur' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>couleur</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].couleur*10 }}%"
+                             aria-valuenow="{{ beer[0].couleur*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'opacité' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>opacité</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].opacite*10 }}%"
+                             aria-valuenow="{{ beer[0].opacite*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'pétillant' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>pétillant</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].petillant*10 }}%"
+                             aria-valuenow="{{ beer[0].petillant*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'douceur' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>douceur</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].douceur*10 }}%"
+                             aria-valuenow="{{ beer[0].douceur*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'amertume' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>amertume</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].amertume*10 }}%"
+                             aria-valuenow="{{ beer[0].amertume*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'acidité' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>acidité</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].acidite*10 }}%"
+                             aria-valuenow="{{ beer[0].acidite*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'gushing' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>gushing</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].gushing*10 }}%"
+                             aria-valuenow="{{ beer[0].gushing*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'alcooleux' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>alcooleux</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].alcooleux*10 }}%"
+                             aria-valuenow="{{ beer[0].alcooleux*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'fruité' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>fruité</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].fruite*10 }}%"
+                             aria-valuenow="{{ beer[0].fruite*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'floral' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>floral</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].floral*10 }}%"
+                             aria-valuenow="{{ beer[0].floral*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'houblonné' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>houblonné</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].houblonne*10 }}%"
+                             aria-valuenow="{{ beer[0].houblonne*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'boisé' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>boisé</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].boise*10 }}%"
+                             aria-valuenow="{{ beer[0].boise*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'torréfié' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>torréfié</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].torrefie*10 }}%"
+                             aria-valuenow="{{ beer[0].torrefie*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'herbeux' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>herbeux</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].herbeux*10 }}%"
+                             aria-valuenow="{{ beer[0].herbeux*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'céréales' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>céréales</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].cereales*10 }}%"
+                             aria-valuenow="{{ beer[0].cereales*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    {% elif sort == 'épicé' %}
+                    <div class="col-3 p-0">
+                        <p class="m-0 small text-end"><em>épicé</em></p>
+                    </div>
+                    <div class="col-6">
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ beer[0].epice*10 }}%"
+                             aria-valuenow="{{ beer[0].epice*10 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
                     {% endif %}
                 </div>
-              </div>
+
             </div>
           </div>
         </div>

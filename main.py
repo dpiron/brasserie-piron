@@ -328,11 +328,11 @@ def home():
     return render_template("index.html")
 
 
-@app.route('/beers')
-def beers():
+@app.route('/beers/<string:sort>')
+def beers(sort):
     home_beer_list = []
     beers_query = Beer.query.filter_by(version=1)
-    desc_expression = desc(Beer.score)
+    desc_expression = get_desc(sort)
     order_by_query = beers_query.order_by(desc_expression)
     beer_name_list = [beer.name for beer in order_by_query]
 
@@ -355,7 +355,49 @@ def beers():
 
     beer_list = [(home_beer_list[i], is_reviewed_list[i]) for i in range(len(home_beer_list))]
 
-    return render_template("beer-album.html", beers=beer_list)
+    return render_template("beer-album.html", beers=beer_list, sort=sort)
+
+
+def get_desc(sort):
+    if sort == 'note':
+        desc_expr = desc(Beer.score)
+    if sort == 'date':
+        desc_expr = desc(Beer.date)
+    if sort == 'mousse':
+        desc_expr = desc(Beer.mousse)
+    if sort == 'couleur':
+        desc_expr = desc(Beer.couleur)
+    if sort == 'opacité':
+        desc_expr = desc(Beer.opacite)
+    if sort == 'pétillant':
+        desc_expr = desc(Beer.petillant)
+    if sort == 'douceur':
+        desc_expr = desc(Beer.douceur)
+    if sort == 'amertume':
+        desc_expr = desc(Beer.amertume)
+    if sort == 'acidité':
+        desc_expr = desc(Beer.acidite)
+    if sort == 'gushing':
+        desc_expr = desc(Beer.gushing)
+    if sort == 'alcooleux':
+        desc_expr = desc(Beer.alcooleux)
+    if sort == 'fruité':
+        desc_expr = desc(Beer.fruite)
+    if sort == 'floral':
+        desc_expr = desc(Beer.floral)
+    if sort == 'houblonné':
+        desc_expr = desc(Beer.houblonne)
+    if sort == 'boisé':
+        desc_expr = desc(Beer.boise)
+    if sort == 'torréfié':
+        desc_expr = desc(Beer.torrefie)
+    if sort == 'herbeux':
+        desc_expr = desc(Beer.herbeux)
+    if sort == 'céréales':
+        desc_expr = desc(Beer.cereales)
+    if sort == 'épicé':
+        desc_expr = desc(Beer.epice)
+    return desc_expr
 
 
 @app.route('/beer/<int:beer_id>')
