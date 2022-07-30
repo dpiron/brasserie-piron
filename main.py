@@ -18,11 +18,15 @@ import string
 import smtplib
 from email.message import EmailMessage
 
+import qrcode
+
 MY_EMAIL = "dpiron.bot@gmail.com"
 MY_APP_KEY = "ghfoxkxzaywhmsma"
+QR_FOLDER = os.path.join('/static', 'QRs')
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+app.config['QR_FOLDER'] = QR_FOLDER
 bootstrap = Bootstrap(app)
 
 # CONNECT TO DB
@@ -288,7 +292,7 @@ def send_email(email, password):
     
     Bonne dégustation!
     
-    Brasserie Piron
+    Les Tontons Brasseurs
     
     """
 
@@ -448,12 +452,45 @@ def admin_add_beer():
             version=1, # form.version.data,
             date=form.date.data,
             description=form.description.data,
-            score=0
+            score=0,
+            mousse=0,
+            couleur=0,
+            opacite=0,
+            petillant=0,
+            douceur=0,
+            amertume=0,
+            acidite=0,
+            gushing=0,
+            alcooleux=0,
+            fruite=0,
+            floral=0,
+            houblonne=0,
+            boise=0,
+            torrefie=0,
+            herbeux=0,
+            cereales=0,
+            epice=0
         )
         db.session.add(new_beer)
         db.session.commit()
+        create_qr(new_beer.id)
         return redirect(url_for("admin_add_beer_page"))
     return render_template("admin-form.html", form=form)
+
+
+@app.route('/admin-qr-page')
+@admin_only
+def admin_qr_page():
+    beers = Beer.query.all()
+    return render_template("admin-qr-page.html", beers=beers)
+
+
+@app.route("/admin-qr/<int:beer_id>")
+@admin_only
+def admin_qr(beer_id):
+    beer = Beer.query.get(beer_id)
+    path = os.path.join(app.config['QR_FOLDER'], f"qr_{beer.id}.png")
+    return render_template("admin-qr.html", beer=beer, path=path)
 
 
 @app.route('/admin-edit-beer-page')
@@ -928,6 +965,21 @@ def contact():
 @app.route("/order", methods=['GET', 'POST'])
 def order():
     return render_template("order.html")
+
+
+def create_qr(id):
+    # Link for website
+    input_data = f"http://www.tontonsbrasseurs.com/beer/{id}"
+    # Creating an instance of qrcode
+    qr = qrcode.QRCode(
+        version=1,
+        box_size=20,
+        border=5)
+    qr.add_data(input_data)
+    qr.make(fit=True)
+    img = qr.make_image(fill='black', back_color='white')
+    img.save(f"static/QRs/qr_{id}.png")
+    pass
 
 
 if __name__ == "__main__":

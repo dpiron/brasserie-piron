@@ -1,0 +1,58 @@
+{% include "header.html" %}
+
+<div class="container">
+
+{% include "navbar.html" %}
+
+    <!-- Title -->
+    <div>
+      <div class="bg-light py-5 px-2 rounded">
+        <div class="col-sm-8 mx-auto">
+          <h1>Admin</h1>
+            <hr>
+
+            <h2>Liste des bières</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Bière</th>
+                        <!-- <th>Version</th> -->
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Score</th>
+                        <th>QR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for beer in beers %}
+                    <tr>
+                        <td class="align-middle">{{ beer.name }}</td>
+                        <!-- <td class="align-middle">{{ beer.version }}</td> -->
+                        <td class="align-middle">{{ beer.type }}</td>
+                        <td class="align-middle">{{ beer.date.strftime('%m/%y') }}</td>
+                        <td class="align-middle">{{ beer.score }}</td>
+                        <th>
+                            <a href="{{ url_for('admin_qr', beer_id=beer.id) }}" class="btn btn-success btn-circle">
+                                <i class="fa-solid fa-qrcode"></i>
+                            </a>
+                        </th>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <hr>
+
+            <a class="btn btn-primary" href="{{ url_for('admin') }}" role="button">Retour à Admin</a>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+
+{% include "footer.html" %}
