@@ -8,7 +8,8 @@ from flask_ckeditor import CKEditorField
 class RegisterForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()])
     password = PasswordField("Mot de passe", validators=[DataRequired()])
-    name = StringField("Nom", validators=[DataRequired()])
+    name = StringField("Prénom", validators=[DataRequired()])
+    surname = StringField("Nom", validators=[DataRequired()])
     submit = SubmitField("S'inscrire")
 
 
@@ -33,6 +34,8 @@ class AddBeerForm(FlaskForm):
     date = DateTimeField("Date (mm/yy) (Exemple : 06/22)", format='%m/%y', validators=[DataRequired()])
     # version = IntegerField("Version", validators=[DataRequired()])
     type = StringField("Type", validators=[DataRequired()])
+    malt = StringField("Malt")
+    houblon = StringField("Houblon")
     description = CKEditorField("Description")
     submit = SubmitField("OK")
 

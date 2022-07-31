@@ -42,6 +42,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(250))
     name = db.Column(db.String(250))
+    surname = db.Column(db.String(250))
     is_admin = db.Column(db.Boolean)
 
     # This will act like a List of Comment objects attached to each User.
@@ -59,6 +60,8 @@ class Beer(db.Model):
     name = db.Column(db.String(250))
     type = db.Column(db.String(100))
     version = db.Column(db.Integer)
+    malt = db.Column(db.String(250))
+    houblon = db.Column(db.String(250))
     description = db.Column(db.String(1000))
     date = db.Column(db.DateTime)
 
@@ -182,6 +185,7 @@ def register():
                 email=form.email.data,
                 password=hash_and_salted_password,
                 name=form.name.data,
+                surname=form.surname.data,
                 is_admin=True
             )
         else:
@@ -189,6 +193,7 @@ def register():
                 email=form.email.data,
                 password=hash_and_salted_password,
                 name=form.name.data,
+                surname=form.surname.data,
                 is_admin=False
             )
         db.session.add(new_user)
@@ -451,6 +456,8 @@ def admin_add_beer():
             type=form.type.data,
             version=1, # form.version.data,
             date=form.date.data,
+            malt=form.malt.data,
+            houblon=form.houblon.data,
             description=form.description.data,
             score=0,
             mousse=0,
@@ -509,6 +516,8 @@ def admin_edit_beer(beer_id):
         type=beer_to_edit.type,
         # version=beer_to_edit.version,
         date=beer_to_edit.date,
+        malt=beer_to_edit.malt,
+        houblon=beer_to_edit.houblon,
         description=beer_to_edit.description
     )
     if edit_form.validate_on_submit():
@@ -516,6 +525,8 @@ def admin_edit_beer(beer_id):
         beer_to_edit.type = edit_form.type.data
         beer_to_edit.version = 1  # edit_form.version.data
         beer_to_edit.date = edit_form.date.data
+        beer_to_edit.malt = edit_form.malt.data
+        beer_to_edit.houblon = edit_form.houblon.data
         beer_to_edit.description = edit_form.description.data
         db.session.commit()
         return redirect(url_for("admin_edit_beer_page"))
@@ -624,7 +635,6 @@ def recalculate_beer(beer_to_be_reviewed, all_reviews):
     couleur_list = [review.couleur for review in all_reviews]
     couleur_avg = get_avg(couleur_list)
     beer_to_be_reviewed.couleur = couleur_avg
-    print(couleur_avg)
 
     opacite_list = [review.opacite for review in all_reviews]
     opacite_avg = get_avg(opacite_list)

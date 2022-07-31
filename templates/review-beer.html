@@ -27,11 +27,16 @@
             </div>
 
             <hr>
-
+            {% if beer.malt != "" or beer.houblon != "" %}
+            <p class="small">
+                <strong>Malt</strong> : {{ beer.malt }}.
+                <span class="px-1">|</span>
+                <strong>Houblon</strong> : {{ beer.houblon }}.
+            </p>
+            {% endif %}
             <p>
                 {{ beer.description }}
             </p>
-
             <hr>
 
         </div>

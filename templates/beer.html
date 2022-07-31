@@ -122,11 +122,16 @@
             </div>
 
             <hr>
-
+            {% if beer.malt != "" or beer.houblon != "" %}
+            <p class="small">
+                <strong>Malt</strong> : {{ beer.malt }}.
+                <span class="px-1">|</span>
+                <strong>Houblon</strong> : {{ beer.houblon }}.
+            </p>
+            {% endif %}
             <p>
                 {{ beer.description }}
             </p>
-
             <hr>
 
         </div>
@@ -461,7 +466,7 @@
                             <div class="card-body">
                                 {% for comment in comments %}
                                     <div>
-                                        <p>"{{ comment.text }}" <span class="blockquote-footer"><strong><em>{{ comment.comment_author.name }}</em></strong> </span>
+                                        <p>"{{ comment.text }}" <span class="blockquote-footer"><strong><em>{{ comment.comment_author.name }} {{ comment.comment_author.surname[0].upper() }}.</em></strong> </span>
 
                                     {% if current_user.is_authenticated %}
                                         {% if ( comment.comment_author == current_user or current_user.is_admin == True ) %}
