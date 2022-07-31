@@ -20,6 +20,8 @@ from email.message import EmailMessage
 
 import qrcode
 
+from flask_talisman import Talisman
+
 MY_EMAIL = "dpiron.bot@gmail.com"
 MY_APP_KEY = "ghfoxkxzaywhmsma"
 QR_FOLDER = os.path.join('/static', 'QRs')
@@ -990,6 +992,9 @@ def create_qr(id):
     img = qr.make_image(fill='black', back_color='white')
     img.save(f"static/QRs/qr_{id}.png")
     pass
+
+
+Talisman(app, content_security_policy=None)
 
 
 if __name__ == "__main__":
