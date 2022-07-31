@@ -34,8 +34,8 @@ class AddBeerForm(FlaskForm):
     date = DateTimeField("Date (mm/yy) (Exemple : 06/22)", format='%m/%y', validators=[DataRequired()])
     # version = IntegerField("Version", validators=[DataRequired()])
     type = StringField("Type", validators=[DataRequired()])
-    malt = StringField('Malt (séparé par des virgules) (Exemple : "Pils, Munich II, Vienna, Froment blanc"')
-    houblon = StringField('Houblon (séparé par des virgules) (Exemple : "Tettnang, Goldings, Styrian Goldings"')
+    malt = StringField('Malt (séparé par des virgules) (Exemple : "Pils, Munich II, Vienna, Froment blanc")')
+    houblon = StringField('Houblon (séparé par des virgules) (Exemple : "Tettnang, Goldings, Styrian Goldings")')
     description = CKEditorField("Description")
     submit = SubmitField("OK")
 
