@@ -23,8 +23,6 @@ import qrcode
 
 from flask_talisman import Talisman
 
-#MY_EMAIL = "dpiron.bot@gmail.com"
-#MY_APP_KEY = "ghfoxkxzaywhmsma"
 QR_FOLDER = os.path.join('/static', 'QRs')
 
 app = Flask(__name__)
