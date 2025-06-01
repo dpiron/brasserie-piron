@@ -1,10 +1,11 @@
 import datetime
 import os
 from functools import wraps
+from urllib.parse import urlencode
+from hashlib import sha256
 
 from flask import Flask, render_template, redirect, url_for, flash, abort
-from flask_bootstrap import Bootstrap
-from flask_gravatar import Gravatar
+from flask_bootstrap import Bootstrap4
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -29,7 +30,17 @@ QR_FOLDER = os.path.join('/static', 'QRs')
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 app.config['QR_FOLDER'] = QR_FOLDER
-bootstrap = Bootstrap(app)
+bootstrap = Bootstrap4(app)
+
+
+def gravatar_url(email, size=100, rating='g', default='retro', force_default=False):
+    hash_value = sha256(email.lower().encode('utf-8')).hexdigest()
+    query_params = urlencode({'d': default, 's': str(size), 'r': rating, 'f': force_default})
+    return f"https://www.gravatar.com/avatar/{hash_value}?{query_params}"
+
+
+app.jinja_env.filters['gravatar'] = gravatar_url
+
 
 # CONNECT TO DB
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///brasserie-piron.db")
@@ -148,13 +159,8 @@ class Comment(db.Model):
     text = db.Column(db.String(1000))
 
 
-db.create_all()
-
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=False, force_lower=False, use_ssl=False,
-                    base_url=None)
 
 
 def admin_only(f):
@@ -998,6 +1004,8 @@ Talisman(app, content_security_policy=None)
 
 
 if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
     app.run(host='0.0.0.0', port=5001, debug=True)
 
 # TODO : Ecrire page d'info, formulaire contact

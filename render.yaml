@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: brasserie-piron
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn main:app
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: brasserie-piron-db
+          property: connectionString
