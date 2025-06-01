@@ -5,7 +5,7 @@ from urllib.parse import urlencode
 from hashlib import sha256
 
 from flask import Flask, render_template, redirect, url_for, flash, abort
-from flask_bootstrap import Bootstrap4
+from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -30,7 +30,7 @@ QR_FOLDER = os.path.join('/static', 'QRs')
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 app.config['QR_FOLDER'] = QR_FOLDER
-bootstrap = Bootstrap4(app)
+bootstrap = Bootstrap(app)
 
 
 def gravatar_url(email, size=100, rating='g', default='retro', force_default=False):
